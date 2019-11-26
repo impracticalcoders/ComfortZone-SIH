@@ -6,7 +6,7 @@ import Home2 from './Home2.js'
 import MC from './MC'
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import Dashboard from './Dashboard.js';
+import Dashboard from './src/Dashboard.js';
 
 const App= ()=>{
   
@@ -23,7 +23,7 @@ const App= ()=>{
 const AppNavigator = createStackNavigator({
   HomeS:Home,
   Home2S:Home2,
-  MCS:MC,
+  SignIn:MC,
   dashboard:Dashboard
 });
 
