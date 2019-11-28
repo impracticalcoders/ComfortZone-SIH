@@ -2,6 +2,8 @@
 import React from 'react';
 import {Text,View,Button,Image} from 'react-native'
 import logo from './images/logo.jpg'
+import {GiftedChat} from "react-native-gifted-chat"
+
 const Home= (props)=>{
   
   return(
@@ -10,10 +12,11 @@ const Home= (props)=>{
         <Image source ={logo} style={{width: 300, height: 300,marginTop:30}}/>
         
         <View style={{marginTop:30}}>
-         <Button title="Continue" onPress={()=>props.navigation.navigate('SignIn')}  />
+         <Button title="Continue" onPress={()=>props.navigation.navigate('dashboard')}  />
          </View>
        
         </View> 
+
   
   )
 }
