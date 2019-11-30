@@ -9,6 +9,7 @@ import Diary from "./src/Diary"
 
 
 const AppNavigator = createStackNavigator({
+  HomeS:Home,
   diary:{
     screen:Diary,
       navigationOptions:{
@@ -16,7 +17,7 @@ const AppNavigator = createStackNavigator({
     }
   },
   dashboard:Dashboard,
-  HomeS:Home,
+  
 });
 
 export default createAppContainer(AppNavigator);
