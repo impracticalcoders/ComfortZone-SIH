@@ -1,16 +1,19 @@
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Platform,
-  StyleSheet,
-  Text,
-  View,
-  StatusBar,Button,Image} from 'react-native'
-import logo from './images/splashimage.jpg'
+  StyleSheet,Text,
+  View,Button,
+  StatusBar, Image
+} from 'react-native'
+
+import logo from './images/splashimage.png'
+
+
 
 function Home(props) {
-  
-  
+
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -18,50 +21,68 @@ function Home(props) {
       alignItems: 'center',
       backgroundColor: '#fff',
     },
-      parent:{
-        height:"100%",
-        marginTop:20,
-        alignItems:'center'
-      },
-      title:{
-        fontSize:30
-      },
-      logo:{
-        width: 300,
-        height: 300,
-        marginTop:30
-      },
-      welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-        color: '#F5FCFF',
-      },
-  
+    parent: {
+      height: "100%",
+      marginTop: 20,
+      alignItems: 'center'
+    },
+    title: {
+      fontSize: 30
+    },
+    logo: {
+      width: 300,
+      height: 300,
+      marginTop: 30
+    },
+    welcome: {
+      fontSize: 20,
+      textAlign: 'center',
+      margin: 10,
+      marginBottom: 50,
+      color: 'black',
+    },
+    MotivationalQuote: {
+      padding: 20,
+      top: 20
+    },
+    buttons: {
+      marginVertical: 4,
+      marginHorizontal: 4,
+    }
+
   })
 
-   
-  return(
 
-    <View style={styles.container}>   
-    <StatusBar
-          barStyle="dark-content"
-          backgroundColor="#fff"
-        />
+  return (
+<View>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="#e3e3e3"
+      />
+
+
+
+
+    
       
-        <View style={styles.continue}>
-            <Button title="Log your mood" onPress={()=>props.navigation.navigate('dashboard')}/>
-            
-            <Button title="Diary" onPress={()=>props.navigation.navigate('diary')}/>
-        </View>
-       
-        </View> 
+      
+        <Button style={styles.buttons} title="Log your mood" onPress={() => props.navigation.navigate('dashboard')}>Log your Mood</Button>
 
-  
+        <Button style={styles.buttons} title="Diary" onPress={() => props.navigation.navigate('diary')}>Personal</Button>
+        
+        <Button style={styles.buttons} title="Help" onPress={() => props.navigation.navigate('dashboard')}>Seek Help</Button>
+</View>
+       
+        
+       
+
+
+
   )
 }
 
 export default Home
+
 
 
 
