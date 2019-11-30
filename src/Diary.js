@@ -43,7 +43,7 @@ function Diary(props) {
                 }
                 
             }
-            alert('i think you are feeling '+word)
+            alert('i think you are feeling '+word+" ,here are some playlists for you")
         props.navigation.navigate(word)
 
         })
