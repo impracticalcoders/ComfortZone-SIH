@@ -1,15 +1,27 @@
 
-import React from 'react';
-import {Text,View,Button,Image,StyleSheet} from 'react-native'
-import logo from './images/logo.jpg'
+import React, {Component} from 'react';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,Button,Image} from 'react-native'
+import logo from './images/splashimage.jpg'
 
-function Home(props){
+function Home(props) {
+  
   
   const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#fff',
+    },
       parent:{
         height:"100%",
         marginTop:20,
-        alignItems:'center'/*for horizontal alignment*/ 
+        alignItems:'center'
       },
       title:{
         fontSize:30
@@ -19,17 +31,28 @@ function Home(props){
         height: 300,
         marginTop:30
       },
-      continue:{marginTop:30}
-
+      welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+        color: '#F5FCFF',
+      },
+  
   })
+
    
   return(
 
-    <View style={styles.parent}>   
-       <Text style={styles.title}>Comfort Zone</Text>
-        <Image source ={logo} style={styles.logo}/>
+    <View style={styles.container}>   
+    <StatusBar
+          barStyle="dark-content"
+          backgroundColor="#fff"
+        />
+      
         <View style={styles.continue}>
-            <Button title="Continue" onPress={()=>props.navigation.navigate('dashboard')}  />
+            <Button title="Log your mood" onPress={()=>props.navigation.navigate('dashboard')}/>
+            
+            <Button title="Diary" onPress={()=>props.navigation.navigate('diary')}/>
         </View>
        
         </View> 
@@ -38,4 +61,9 @@ function Home(props){
   )
 }
 
-export default Home;
+export default Home
+
+
+
+
+
