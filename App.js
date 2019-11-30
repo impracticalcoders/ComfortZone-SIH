@@ -13,7 +13,7 @@ import Excited  from "./src/moods/Excited"
 import Fear  from "./src/moods/Fear"
 import Happy  from "./src/moods/Happy"
 import Sad  from "./src/moods/Sad"
-
+import PastNotes  from "./src/PastNotes"
 import {Image} from 'react-native'
 import { BorderlessButton } from 'react-native-gesture-handler';
 const AppNavigator = createStackNavigator({
@@ -47,6 +47,7 @@ const AppNavigator = createStackNavigator({
   Angry:Angry,
   Excited:Excited,
   HomeS:Home,
+  pastnotes:PastNotes,
   headerMode:'none',
 
 });

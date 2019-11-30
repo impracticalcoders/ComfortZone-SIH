@@ -37,6 +37,9 @@ function Home(props) {
         margin: 10,
         color: '#F5FCFF',
       },
+      buttons:{
+        margin:10,
+      }
   
   })
 
@@ -49,10 +52,18 @@ function Home(props) {
           backgroundColor="#fff"
         />
       
-        <View style={styles.continue}>
-            <Button title="Log your mood" onPress={()=>props.navigation.navigate('dashboard')}/>
-            
-            <Button title="Diary" onPress={()=>props.navigation.navigate('diary')}/>
+        <View >
+            <View  style={styles.buttons}> 
+                <Button title="Log your mood"  onPress={()=>props.navigation.navigate('dashboard')}/>
+            </View> 
+
+            <View  style={styles.buttons}>
+                <Button title="Your Diary"  onPress={()=>props.navigation.navigate('diary')}/>
+            </View>
+
+            <View  style={styles.buttons}>
+                <Button title="Past Notes" onPress={()=>props.navigation.navigate('pastnotes')}/>
+            </View> 
         </View>
        
         </View> 
