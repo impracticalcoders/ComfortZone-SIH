@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {Text,View,Button,TextInput,StyleSheet} from "react-native"
-function Diary() {
+function Diary(props) {
 
     const style= StyleSheet.create({
         
@@ -86,6 +86,8 @@ function Diary() {
                 
             }
             alert('i think you are feeling '+word)
+        props.navigation.navigate(word)
+
         })
 
     }
