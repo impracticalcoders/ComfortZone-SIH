@@ -10,6 +10,7 @@ import Diary from "./src/Diary"
 
 import {Image} from 'react-native'
 const AppNavigator = createStackNavigator({
+
   splashscreen:{
     screen:Home,
     navigationOptions: {
@@ -22,6 +23,7 @@ const AppNavigator = createStackNavigator({
     }
 
   },
+
   diary:{
     screen:Diary,
       navigationOptions:{
@@ -31,8 +33,10 @@ const AppNavigator = createStackNavigator({
   },
   
   dashboard:Dashboard,
+
   HomeS:Home,
   headerMode:'none',
+
 });
 
 export default createAppContainer(AppNavigator);
