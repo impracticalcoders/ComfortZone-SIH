@@ -133,13 +133,12 @@ const TabScreens = createBottomTabNavigator(
 
     return (
       <View>
-      <View style={{marginBottom:20}} >
-      <TouchableOpacity  onPress={()=>props.navigation.navigate('diary')}>
-        <Text>Diary</Text>
-        </TouchableOpacity>
+      
+      <View>
+        <Text>'Hello  </Text>
       </View>
 
-      <View style={{top:"1700%",position:'absolute',flex: 1, flexDirection: 'row'} }> 
+      <View style={{top:656,position:'absolute',flex: 1, flexDirection: 'row'} }> 
     <View style={{width:'25%'}}>
     <TouchableOpacity style={{height:80,backgroundColor:'green'}} onPress={()=>props.navigation.navigate('Home')}>
         <Text>Home</Text>
