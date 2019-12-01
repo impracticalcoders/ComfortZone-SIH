@@ -15,6 +15,9 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import Diary from './src/Components/Diary.js';
 import Dashboard from './src/Components/Dashboard.js';
+import Navbar from "./src/Components/Navbar"
+// import Save from '.src/Components/Diary'
+
 
 /*export default class App extends React.Component{
   render(){
@@ -37,8 +40,12 @@ const AppNavigator = createStackNavigator({
     }
 
   },
-  diary:Diary,
-  
+  diary:{
+    screen: Diary,
+    // navigationOptions:{
+    //   headerRight:<Save/>
+    // },
+  },
   dashboard:Dashboard,
   Happy:Happy,
   Bored:Bored,
@@ -48,17 +55,11 @@ const AppNavigator = createStackNavigator({
   Excited:Excited,
   HomeS:Home,
   pastnotes:PastNotes,
+  navbar:Navbar,
   headerMode:'none',
-  
   
 })
 export default createAppContainer(AppNavigator);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },})
+
 
