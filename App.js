@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {View,Button,StyleSheet,Image} from 'react-native'
+import {View,Button,StyleSheet,Image,Text} from 'react-native'
 import Home from './Home.js'
 import Angry  from "./src/moods/Angry"
 import Bored  from "./src/moods/Bored"
@@ -16,6 +16,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Diary from './src/Components/Diary.js';
 import Dashboard from './src/Components/Dashboard.js';
 import Navbar from "./src/Components/Navbar"
+import Prevnotes from "./src/Components/Prevnotes"
 // import Save from '.src/Components/Diary'
 
 
@@ -42,9 +43,9 @@ const AppNavigator = createStackNavigator({
   },
   diary:{
     screen: Diary,
-    // navigationOptions:{
-    //   headerRight:<Save/>
-    // },
+    //  navigationOptions:{
+    //   headerRight:
+    //  },
   },
   dashboard:Dashboard,
   Happy:Happy,
@@ -54,6 +55,7 @@ const AppNavigator = createStackNavigator({
   Angry:Angry,
   Excited:Excited,
   HomeS:Home,
+  prevnotes:Prevnotes,
   pastnotes:PastNotes,
   navbar:Navbar,
   headerMode:'none',
