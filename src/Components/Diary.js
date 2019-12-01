@@ -93,6 +93,7 @@ function Diary(props) {
             setmt(word)
 
             let mooddata =['happy']
+
             AsyncStorage.getItem('moods').then(res=>{
             mooddata = JSON.parse(res) 
             console.log(mooddata)
@@ -105,7 +106,7 @@ function Diary(props) {
 
         })
         let data =['hi']
-       
+
         AsyncStorage.getItem('notes').then(res=>{
             data = JSON.parse(res) 
             console.log(data)

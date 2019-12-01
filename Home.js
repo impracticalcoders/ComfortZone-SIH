@@ -60,7 +60,7 @@ function Home (props) {
         height:40,backgroundColor:'white',alignItems:'center'
       },
       footer: {
-        top:110,
+        top:10,
         bottom: 0,
       },
       
@@ -81,7 +81,7 @@ function Home (props) {
       <View style={styles.footer}>
 
       
-      <View style={{top:670,position:'absolute',flex: 1, flexDirection: 'row'} }> 
+      <View style={{top:0,position:'absolute',flex: 1, flexDirection: 'row'} }> 
     <View style={{width:'25%'}}>
     <TouchableOpacity style={styles.buttons} onPress={()=>props.navigation.navigate('Home')}>
     <Image source={homeicon} style={{width:40,height : 40}}/>
