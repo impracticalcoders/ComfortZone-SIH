@@ -7,7 +7,6 @@ import {Text,View,Button,TextInput,StyleSheet,TouchableOpacity, AsyncStorage} fr
 function Prevnotes(props){
 
     const [dataList,sdt] = useState([])
-
     AsyncStorage.getItem('notes').then(res=>{
         sdt(JSON.parse(res))
     })

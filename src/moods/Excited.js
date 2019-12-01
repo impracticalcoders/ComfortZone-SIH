@@ -8,7 +8,7 @@ function Excited(){
     return(
         <View>
             <Text>Excited</Text>
-            <SpotifyAPI setMood = "Beats"/>
+            <SpotifyAPI setMood = "club hits"/>
 
         </View>
     )
