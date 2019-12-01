@@ -7,7 +7,7 @@ function Sad(){
     return(
         <View>
             <Text>Sad</Text>
-            <SpotifyApi setMood = "happy "/>
+            <SpotifyApi setMood = "happy"/>
         </View>
     )
 }

@@ -4,7 +4,8 @@ import {
   Platform,
   StyleSheet, Text,
   View, Button,
-  StatusBar, Image
+  StatusBar, Image,
+  TouchableOpacity
 } from 'react-native'
 
 import { Icon } from 'native-base'
@@ -13,6 +14,7 @@ import { TabNavigator } from 'react-navigation'
 import Diary from './src/Components/Diary.js';
 import Dashboard from './src/Components/Dashboard.js';
 import HomeScreen from './src/Components/HomeScreen.js';
+import Navbar from "./src/Components/Navbar"
 
 //import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
 
@@ -93,7 +95,6 @@ const TabScreens = createBottomTabNavigator(
 
     const styles = StyleSheet.create({
       container: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
@@ -131,13 +132,43 @@ const TabScreens = createBottomTabNavigator(
 
 
     return (
-<View>
+      <View>
+      <View style={{marginBottom:20}} >
+      <TouchableOpacity  onPress={()=>props.navigation.navigate('diary')}>
+        <Text>Diary</Text>
+        </TouchableOpacity>
+      </View>
 
-<Button title="click" onPress={()=>props.navigation.navigate('dashboard')}>Hello another world</Button>
-<Button title="click" onPress={()=>props.navigation.navigate('diary')}>Hello another world</Button>
+      <View style={{top:"1700%",position:'absolute',flex: 1, flexDirection: 'row'} }> 
+    <View style={{width:'25%'}}>
+    <TouchableOpacity style={{height:80,backgroundColor:'green'}} onPress={()=>props.navigation.navigate('Home')}>
+        <Text>Home</Text>
+        </TouchableOpacity>
+    </View>
 
+    <View style={{width:'25%'}}>
+      <TouchableOpacity style={{height:80,backgroundColor:'blue'}} onPress={()=>props.navigation.navigate('diary')}>
+        <Text style={{color:'white',fontSize:20}}>Diary</Text>
+        </TouchableOpacity>  
+    </View>
+
+    <View style={{width:'25%'}}>
+    <TouchableOpacity style={{height:80,backgroundColor:'yellow'}} onPress={()=>props.navigation.navigate('diary')}>
+        <Text>spotify</Text>
+        </TouchableOpacity>
+        
+    </View>
+
+    <View style={{width:'25%'}}>
+    <TouchableOpacity style={{height:80,backgroundColor:'red'}} onPress={()=>props.navigation.navigate('diary')}>
+        <Text>Emergency!</Text>
+        </TouchableOpacity>
+        
+    </View>
+
+
+    </View>
 </View>
-
 
 
     );
