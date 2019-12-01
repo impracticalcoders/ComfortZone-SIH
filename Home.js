@@ -18,6 +18,7 @@ import Diary from './src/Components/Diary.js';
 import Dashboard from './src/Components/Dashboard.js';
 import HomeScreen from './src/Components/HomeScreen.js';
 import Navbar from "./src/Components/Navbar"
+import Emergency from "./src/Components/seekhelp.js"
 
 //import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
 
@@ -150,7 +151,7 @@ const TabScreens = createBottomTabNavigator(
     </View>
 
     <View style={{width:'25%'}}>
-      <TouchableOpacity style={styles.buttons} onPress={()=>props.navigation.navigate('diary')}>
+      <TouchableOpacity style={styles.buttons} onPress={()=>props.navigation.navigate('prevnotes')}>
       <Image source={diarylogo} style={{width:40,height : 40}}/>
         </TouchableOpacity>  
     </View>
@@ -163,7 +164,7 @@ const TabScreens = createBottomTabNavigator(
     </View>
 
     <View style={{width:'25%'}}>
-    <TouchableOpacity style={styles.buttons} onPress={()=>props.navigation.navigate('diary')}>
+    <TouchableOpacity style={styles.buttons} onPress={()=>props.navigation.navigate('emergency')}>
     <Image source={lifesaver} style={{width:40,height : 40}}/>
         </TouchableOpacity>
         
