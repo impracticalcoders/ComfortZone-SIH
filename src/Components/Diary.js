@@ -89,6 +89,7 @@ function Diary(props) {
                 }
                 
             }
+
             setmt(word)
 
             let mooddata =['happy']
@@ -98,7 +99,9 @@ function Diary(props) {
             mooddata.push(word)
             AsyncStorage.setItem('moods',JSON.stringify(mooddata))
         })
-            alert('I think you are feeling '+word+" ,I think I have just the right thing for you - check out your media! ")
+        
+            alert('You seem to be '+word+" . I have just the right thing for you, go to your media tab ")
+
 
         })
         let data =['hi']
@@ -128,35 +131,8 @@ function Diary(props) {
             </View>
             
         
-            <View style={{top:670,position:'absolute',flex: 1, flexDirection: 'row'} }> 
-    <View style={{width:'25%'}}>
-    <TouchableOpacity  onPress={()=>props.navigation.navigate('Home')}>
-    <Image source={homeicon} style={{width:40,height : 40}}/>
-        </TouchableOpacity>
-    </View>
 
-    <View style={{width:'25%'}}>
-      <TouchableOpacity  onPress={()=>props.navigation.navigate('prevnotes')}>
-      <Image source={diarylogo} style={{width:40,height : 40}}/>
-        </TouchableOpacity>  
-    </View>
-
-    <View style={{width:'25%'}}>
-    <TouchableOpacity onPress={()=>props.navigation.navigate('media')}>
-    <Image source={entertainlogo} style={{width:40,height : 40}}/>
-        </TouchableOpacity>
-        
-    </View>
-
-    <View style={{width:'25%'}}>
-    <TouchableOpacity  onPress={()=>props.navigation.navigate('emergency')}>
-    <Image source={lifesaver} style={{width:40,height : 40}}/>
-        </TouchableOpacity>
-        
-    </View>
-
-
-    </View>
+    
         </View>
               );
 }
