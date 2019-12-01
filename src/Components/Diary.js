@@ -5,15 +5,17 @@ function Diary(props) {
     const style= StyleSheet.create({
         
         CreateNote:{
+            
             fontSize:25,
             borderWidth:1 ,
             height:480,
-            borderColor:'gray',            
+            borderColor:'gray',   
+            backfaceVisibility:'visible',         
         },
         MotivationalQuote:{
             padding:20,
            top:20
-        }
+        },
     })
 
     const [NoteText,setnt] = useState('')
@@ -58,8 +60,8 @@ function Diary(props) {
                 placeholder='how are you feeling'
                 onChangeText={text=>setnt(text.toString())}/>       
              <Button title='click' onPress={getEmotion}/>
-            <Text style={style.MotivationalQuote} >It does not matter how slowly you go as long as you do not stop.</Text>   
-           
+            
+             <Text style={style.MotivationalQuote} >It does not matter how slowly you go as long as you do not stop.</Text>   
         </View>
               );
 }
