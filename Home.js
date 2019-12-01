@@ -18,10 +18,10 @@ import HomeScreen from './src/Components/HomeScreen.js';
 
 function Home (props) {
 
- /* static navigationOptions = {
+navigationOptions = {
     // headerLeft: <Image source={logo} style={{ width: 50, height: 50, paddingLeft: 10 }} />,
     title: 'Smile A While',
-  }*/
+  }
 
   // constructor(props){
   //   super(props)

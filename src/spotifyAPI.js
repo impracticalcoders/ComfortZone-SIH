@@ -10,7 +10,7 @@ function spotifyAPI(props) {
         if(searchItem)
         fetch("https://api.spotify.com/v1/search?q="+searchItem+"&type=playlist",{
             headers: {
-            'Authorization': 'Bearer ' + 'BQBB6dZ7geYKzhjJ08DAPChf-b9jBYgtgE0dD4jM56ZtDRUZGpnGvCERBwO-8TfnV54Acwf-QugvGHp8Jglm9m_AuGWWiBQ6Pl0f19l2_QWVK2pyGpKFnE2_I7pdg8l8Rr8Lsxv8uJtNefcUns-5XKnTXIajj-nWBnp_a7o_zzrer3b0pzqBDjs'
+            'Authorization': 'Bearer ' + 'BQDOdmiXhPImBVTGDo6C-F_SKvv9ID91hE7z6cd3TOliPlPNT4IGjULUz0bwtLMzDIW6Jg4seZA9VbKZyJXcjVCUNkvmo8WDGcJbfMRuqz69SaX5uJ7tZLppxMdC9bzU_7-DAlwcwgVrCGcr03wvfvt6GmHrbBCdJTpNpYtebHHpzyfpxmGM8uo'
             }
         }).then(res=>res.json()).then(resp=>{
             let list = []
