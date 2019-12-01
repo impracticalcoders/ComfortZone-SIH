@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import {
+import {ScrollView,
   Platform,
   StyleSheet, Text,
   View, Button,
@@ -19,83 +19,12 @@ import Dashboard from './src/Components/Dashboard.js';
 import HomeScreen from './src/Components/HomeScreen.js';
 import Navbar from "./src/Components/Navbar"
 import Emergency from "./src/Components/seekhelp.js"
+import logo from './images/silhouette47.jpg'
 
-//import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
+
 
 function Home (props) {
 
-/*navigationOptions = {
-    // headerLeft: <Image source={logo} style={{ width: 50, height: 50, paddingLeft: 10 }} />,
-    title: 'Smile A While',
-  }*/
-
-  // constructor(props){
-  //   super(props)
-  // }
-
-
-  // render(props) {
-
-    
-/*const TabBarComponent = props => <BottomTabBar {...props} />;
-
-const TabScreens = createBottomTabNavigator(
-  {
-    DiaryTab: {
-      screen: Diary
-    },
-    HomeTab: {
-      screen: HomeScreen
-
-    },
-
-    MusicTab: {
-      screen: Dashboard
-    },
-
-  },
-  {
-    tabBarComponent: props => (
-      <TabBarComponent {...props} style={{ borderTopColor: '#605F60' }} />
-    ),
-  }
-);
-
-    /*const AppTabNavigator = TabNavigator({
-      DiaryTab: {
-        screen: Diary
-      },
-      HomeTab: {
-        screen: HomeScreen
-
-      },
-
-      MusicTab: {
-        screen: Dashboard
-      },
-
-
-    }, {
-      animationEnabled: true,
-      swipeEnabled: true,
-      tabBarPosition: 'bottom',
-      tabBarOptions: {
-        style: {
-          ...Platform.select({
-            android: {
-              backgroundColor: 'white'
-            }
-          })
-        }
-      }
-
-
-    }
-
-
-
-
-    )*/
 
     const styles = StyleSheet.create({
       container: {
@@ -112,9 +41,7 @@ const TabScreens = createBottomTabNavigator(
         fontSize: 30
       },
       logo: {
-        width: 300,
-        height: 300,
-        marginTop: 30
+        height:400,width:400,opacity:0.5
       },
       welcome: {
         fontSize: 20,
@@ -133,7 +60,7 @@ const TabScreens = createBottomTabNavigator(
         height:40,backgroundColor:'white',alignItems:'center'
       },
       footer: {
-        top:510,
+        top:110,
         bottom: 0,
       },
       
@@ -141,6 +68,13 @@ const TabScreens = createBottomTabNavigator(
 
 
     return (
+      <View>
+          
+          <Image source ={logo } style={styles.logo}/>
+         
+     
+
+
       <View style={styles.footer}>
       
       <View style={{top:"1300%",position:'absolute',flex: 1, flexDirection: 'row'} }> 
@@ -165,7 +99,7 @@ const TabScreens = createBottomTabNavigator(
 
     <View style={{width:'25%'}}>
     <TouchableOpacity style={styles.buttons} onPress={()=>props.navigation.navigate('emergency')}>
-    <Image source={lifesaver} style={{width:40,height : 40}}/>
+    <Image source={lifesaver} style={{width:35,height : 35}}/>
         </TouchableOpacity>
         
     </View>
@@ -173,7 +107,7 @@ const TabScreens = createBottomTabNavigator(
 
     </View>
 </View>
-
+</View>
 
     );
   }
