@@ -7,7 +7,7 @@ function Fear(){
     return(
         <View>
             <Text>Fear</Text>
-            <SpotifyAPI setMood = "Team"/>
+            <SpotifyAPI setMood = "calming instrumental covers"/>
 
         </View>
     )

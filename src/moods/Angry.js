@@ -8,7 +8,7 @@ function Angry(){
     return(
         <View>
             <Text>Angry</Text>
-            <SpotifyAPI setMood = "Calm "/>
+            <SpotifyAPI setMood = "peaceful meditation "/>
 
         </View>
     )

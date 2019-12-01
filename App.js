@@ -18,6 +18,8 @@ import Dashboard from './src/Components/Dashboard.js';
 import Navbar from "./src/Components/Navbar"
 import Prevnotes from "./src/Components/Prevnotes"
 import Emergency from "./src/Components/seekhelp.js"
+import Metime from "./src/Components/Metime"
+import Media from "./src/Components/Media"
 // import Save from '.src/Components/Diary'
 
 
@@ -55,10 +57,12 @@ const AppNavigator = createStackNavigator({
   Sad:Sad,
   Fear:Fear,
   Angry:Angry,
+  metime:Metime,
   Excited:Excited,
   HomeS:Home,
   prevnotes:Prevnotes,
   pastnotes:PastNotes,
+  media:Media,
   navbar:Navbar,
   headerMode:'none',
   

@@ -8,7 +8,7 @@ function Bored(){
     return(
         <View>
             <Text>Bored</Text>
-            <SpotifyAPI setMood = "Excited "/>
+            <SpotifyAPI setMood = "pop rising "/>
 
         </View>
     )

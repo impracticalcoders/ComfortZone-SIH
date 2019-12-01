@@ -68,7 +68,10 @@ function Home (props) {
 
 
     return (
-      <View>
+
+      <View >
+
+      
           
           <Image source ={logo } style={styles.logo}/>
          
@@ -76,8 +79,9 @@ function Home (props) {
 
 
       <View style={styles.footer}>
+
       
-      <View style={{top:"1300%",position:'absolute',flex: 1, flexDirection: 'row'} }> 
+      <View style={{top:670,position:'absolute',flex: 1, flexDirection: 'row'} }> 
     <View style={{width:'25%'}}>
     <TouchableOpacity style={styles.buttons} onPress={()=>props.navigation.navigate('Home')}>
     <Image source={homeicon} style={{width:40,height : 40}}/>
@@ -91,7 +95,7 @@ function Home (props) {
     </View>
 
     <View style={{width:'25%'}}>
-    <TouchableOpacity style={styles.buttons} onPress={()=>props.navigation.navigate('diary')}>
+    <TouchableOpacity style={styles.buttons} onPress={()=>props.navigation.navigate('media')}>
     <Image source={entertainlogo} style={{width:40,height : 40}}/>
         </TouchableOpacity>
         
