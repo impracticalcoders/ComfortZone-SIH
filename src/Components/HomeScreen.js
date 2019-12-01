@@ -67,7 +67,7 @@ function HomeScreen(props){
                     </View> 
         
                     <View  >
-                       <Text>Hello another world</Text>
+                       <Button >Hello another world</Button>
                     </View>
         
                     <View  >
