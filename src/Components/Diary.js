@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {Text,View,Button,TextInput,StyleSheet} from "react-native"
-function Diary() {
+function Diary(props) {
 
     const style= StyleSheet.create({
         
@@ -19,49 +19,7 @@ function Diary() {
     })
 
     const [NoteText,setnt] = useState('')
-    const emotionalWordsList = ['sad','tiring','happy','happiest','happier','sleepy']
-    /**
-     * logic for searching of unique words and storing thier count
-     * ** the text from the text input is taken 
-     * ** using split(' ') funstion , transfer all the words into an array 
-     * ** count the number of times the word repeats in the array and store it into the map
-     * ** show the word which is reapeated max number of times
-     */
-    const calc=()=>{
-        var wordsMap ={}
-
-        if(NoteText){
-            var list =[]    
-            list = NoteText.split(' ')
-            list.map(el=>{
-                if( emotionalWordsList.includes(el)){
-                    if (wordsMap.hasOwnProperty(el)) {
-                        wordsMap[el]++;
-                    } else {
-                        wordsMap[el] = 1;
-                    }
-                }
-            })
-
-            let txt =""
-            for(var el in wordsMap){
-                txt= txt+ (el + ' counts '+ wordsMap[el])+'\n'
-            }
-            alert(txt)
-
-            let word=""
-            let max=0
-            for(el in wordsMap){
-                if(wordsMap[el]>max)
-                {
-                    max=wordsMap[el]
-                    word=el
-                }
-            }
-            alert('the most reapeated word is '+word)
-        }
-           
-    }
+    
 
     const getEmotion=()=>{
       
@@ -87,7 +45,9 @@ function Diary() {
                 }
                 
             }
-            alert('i think you are feeling '+word)
+            alert('i think you are feeling '+word+" ,here are some playlists for you")
+        props.navigation.navigate(word)
+
         })
 
     }

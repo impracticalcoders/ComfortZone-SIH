@@ -2,86 +2,148 @@
 import React, { Component } from 'react';
 import {
   Platform,
-  StyleSheet,Text,
-  View,Button,
+  StyleSheet, Text,
+  View, Button,
   StatusBar, Image
 } from 'react-native'
 
-import logo from './images/splashimage.png'
+import { Icon } from 'native-base'
+//import logo from './images/splashimage.png'
+import { TabNavigator } from 'react-navigation'
+import Diary from './src/Components/Diary.js';
+import Dashboard from './src/Components/Dashboard.js';
+import HomeScreen from './src/Components/HomeScreen.js';
+
+import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
+
+class Home extends Component {
+
+  static navigationOptions = {
+    // headerLeft: <Image source={logo} style={{ width: 50, height: 50, paddingLeft: 10 }} />,
+    title: 'Smile A While',
+  }
 
 
 
-function Home(props) {
 
-
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#fff',
-    },
-    parent: {
-      height: "100%",
-      marginTop: 20,
-      alignItems: 'center'
-    },
-    title: {
-      fontSize: 30
-    },
-    logo: {
-      width: 300,
-      height: 300,
-      marginTop: 30
-    },
-    welcome: {
-      fontSize: 20,
-      textAlign: 'center',
-      margin: 10,
-      marginBottom: 50,
-      color: 'black',
-    },
-    MotivationalQuote: {
-      padding: 20,
-      top: 20
-    },
-    buttons: {
-      marginVertical: 4,
-      marginHorizontal: 4,
-    }
-
-  })
-
-
-  return (
-<View>
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor="#e3e3e3"
-      />
-
-
-
+  render() {
 
     
-      
-      
-        <Button style={styles.buttons} title="Log your mood" onPress={() => props.navigation.navigate('dashboard')}>Log your Mood</Button>
+const TabBarComponent = props => <BottomTabBar {...props} />;
 
-        <Button style={styles.buttons} title="Diary" onPress={() => props.navigation.navigate('diary')}>Personal</Button>
-        
-        <Button style={styles.buttons} title="Help" onPress={() => props.navigation.navigate('dashboard')}>Seek Help</Button>
-</View>
-       
-        
-       
+const TabScreens = createBottomTabNavigator(
+  {
+    DiaryTab: {
+      screen: Diary
+    },
+    HomeTab: {
+      screen: HomeScreen
+
+    },
+
+    MusicTab: {
+      screen: Dashboard
+    },
+
+  },
+  {
+    tabBarComponent: props => (
+      <TabBarComponent {...props} style={{ borderTopColor: '#605F60' }} />
+    ),
+  }
+);
+
+    /*const AppTabNavigator = TabNavigator({
+      DiaryTab: {
+        screen: Diary
+      },
+      HomeTab: {
+        screen: HomeScreen
+
+      },
+
+      MusicTab: {
+        screen: Dashboard
+      },
+
+
+    }, {
+      animationEnabled: true,
+      swipeEnabled: true,
+      tabBarPosition: 'bottom',
+      tabBarOptions: {
+        style: {
+          ...Platform.select({
+            android: {
+              backgroundColor: 'white'
+            }
+          })
+        }
+      }
+
+
+    }
 
 
 
-  )
+
+    )*/
+
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+      },
+      parent: {
+        height: "100%",
+        marginTop: 20,
+        alignItems: 'center'
+      },
+      title: {
+        fontSize: 30
+      },
+      logo: {
+        width: 300,
+        height: 300,
+        marginTop: 30
+      },
+      welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+        marginBottom: 50,
+        color: 'black',
+      },
+      MotivationalQuote: {
+        padding: 20,
+        top: 20
+      },
+      buttons: {
+        marginVertical: 4,
+        marginHorizontal: 4,
+      }
+
+    })
+
+
+    return (
+
+
+      <TabScreens />
+
+
+
+
+
+
+    );
+  }
 }
 
-export default Home
+
+export default Home;
 
 
 

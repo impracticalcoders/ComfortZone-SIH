@@ -1,39 +1,36 @@
 
 import React from 'react';
-import {View,Button} from 'react-native'
+import {View,Button,StyleSheet} from 'react-native'
 import Home from './Home.js'
-import logo from './images/splashimage.png'
+import HomeScreen from './src/Components/HomeScreen.js'
+//import logo from './images/splashimage.png'
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import Dashboard from './src/Dashboard.js';
-import Diary from "./src/Diary"
 
-import {Image} from 'react-native'
+/*export default class App extends React.Component{
+  render(){
+    return(<AppTabNavigator/>);
+  }
+  
+  
+  }*/
+ 
 const AppNavigator = createStackNavigator({
-  splashscreen:{
-    screen:Home,
-    navigationOptions: {
-      title: 'Smile A While',
-      headerLeft: <Image source ={logo} style={{width: 50, height: 50}} /> ,
-      headerStyle: {
-        backgroundColor: '#e3e3e3',
-      },
-      headerTintColor: '#606070',
-    }
-
-  },
-  diary:{
-    screen:Diary,
-      navigationOptions:{
-      headerTitle:'Your diary'
-    }
-
-  },
-
-  dashboard:Dashboard,
-  HomeS:Home,
-  headerMode:'none',
-});
-
+  
+  Main:{
+    screen:Home
+  }
+  
+  
+  
+})
 export default createAppContainer(AppNavigator);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },})
 
