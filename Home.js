@@ -9,7 +9,10 @@ import {
 } from 'react-native'
 
 import { Icon } from 'native-base'
-//import logo from './images/splashimage.png'
+import diarylogo from './images/diaryicon.jpg'
+import entertainlogo from './images/movies.png'
+import lifesaver from './images/lifesaver.png'
+import homeicon from './images/homeicon.png'
 import { TabNavigator } from 'react-navigation'
 import Diary from './src/Components/Diary.js';
 import Dashboard from './src/Components/Dashboard.js';
@@ -20,10 +23,10 @@ import Navbar from "./src/Components/Navbar"
 
 function Home (props) {
 
-navigationOptions = {
+/*navigationOptions = {
     // headerLeft: <Image source={logo} style={{ width: 50, height: 50, paddingLeft: 10 }} />,
     title: 'Smile A While',
-  }
+  }*/
 
   // constructor(props){
   //   super(props)
@@ -126,42 +129,42 @@ const TabScreens = createBottomTabNavigator(
       buttons: {
         marginVertical: 4,
         marginHorizontal: 4,
-      }
-
+        height:40,backgroundColor:'white',alignItems:'center'
+      },
+      footer: {
+        top:510,
+        bottom: 0,
+      },
+      
     })
 
 
     return (
-      <View>
-      <View style={{marginBottom:20}} >
-      <TouchableOpacity  onPress={()=>props.navigation.navigate('diary')}>
-        <Text>Diary</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={{top:"1700%",position:'absolute',flex: 1, flexDirection: 'row'} }> 
+      <View style={styles.footer}>
+      
+      <View style={{top:"1300%",position:'absolute',flex: 1, flexDirection: 'row'} }> 
     <View style={{width:'25%'}}>
-    <TouchableOpacity style={{height:80,backgroundColor:'green'}} onPress={()=>props.navigation.navigate('Home')}>
-        <Text>Home</Text>
+    <TouchableOpacity style={styles.buttons} onPress={()=>props.navigation.navigate('Home')}>
+    <Image source={homeicon} style={{width:40,height : 40}}/>
         </TouchableOpacity>
     </View>
 
     <View style={{width:'25%'}}>
-      <TouchableOpacity style={{height:80,backgroundColor:'blue'}} onPress={()=>props.navigation.navigate('diary')}>
-        <Text style={{color:'white',fontSize:20}}>Diary</Text>
+      <TouchableOpacity style={styles.buttons} onPress={()=>props.navigation.navigate('diary')}>
+      <Image source={diarylogo} style={{width:40,height : 40}}/>
         </TouchableOpacity>  
     </View>
 
     <View style={{width:'25%'}}>
-    <TouchableOpacity style={{height:80,backgroundColor:'yellow'}} onPress={()=>props.navigation.navigate('diary')}>
-        <Text>spotify</Text>
+    <TouchableOpacity style={styles.buttons} onPress={()=>props.navigation.navigate('diary')}>
+    <Image source={entertainlogo} style={{width:40,height : 40}}/>
         </TouchableOpacity>
         
     </View>
 
     <View style={{width:'25%'}}>
-    <TouchableOpacity style={{height:80,backgroundColor:'red'}} onPress={()=>props.navigation.navigate('diary')}>
-        <Text>Emergency!</Text>
+    <TouchableOpacity style={styles.buttons} onPress={()=>props.navigation.navigate('diary')}>
+    <Image source={lifesaver} style={{width:40,height : 40}}/>
         </TouchableOpacity>
         
     </View>
