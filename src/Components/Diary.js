@@ -1,15 +1,17 @@
 import React,{useState} from 'react';
-import {Text,View,Button,TextInput,StyleSheet,TouchableOpacity} from "react-native"
+import {navigationOptions} from 'react-navigation'
+import {Text,View,Button,TextInput,StyleSheet,TouchableOpacity, AsyncStorage} from "react-native"
 function Diary(props) {
+   
 
     const style= StyleSheet.create({
         
         CreateNote:{
             
             fontSize:25,
-            borderWidth:1 ,
-            height:480,
-            borderColor:'gray',   
+     
+            height:550,
+             
             backfaceVisibility:'visible',         
         },
         MotivationalQuote:{
@@ -45,12 +47,19 @@ function Diary(props) {
                 }
                 
             }
-            alert('i think you are feeling '+word+" ,here are some playlists for you")
-        props.navigation.navigate(word)
+            alert('I think you are feeling '+word+" ,I think I have just the right thing for you - check out your media! ")
 
         })
-
+        let data =['hi']
+       
+        AsyncStorage.getItem('notes').then(res=>{
+            data = JSON.parse(res) 
+            console.log(data)
+            data.push(NoteText)
+            AsyncStorage.setItem('notes',JSON.stringify(data))
+        })
     }
+  
 
     return (
         <View>
@@ -58,13 +67,15 @@ function Diary(props) {
                 multiline
                 style={style.CreateNote}
                 placeholder='how are you feeling'
-                onChangeText={text=>setnt(text.toString())}/>       
-             <Button name="Save" title='Save' style={{width:'50%'}}onPress={getEmotion}/>
+                onChangeText={text=>setnt(text.toString())}/>     
+
+            <View style={{width:'100%',marginTop:20}}>  
+                <Button name="Save" title='Save' onPress={getEmotion}/>
+            </View>
             
-             <Text style={style.MotivationalQuote} >It does not matter how slowly you go as long as you do not stop.</Text>   
         
             
-      <View style={{top:"112%",position:'absolute',flex: 1, flexDirection: 'row'} }> 
+      <View style={{top:657,position:'absolute',flex: 1, flexDirection: 'row'} }> 
     <View style={{width:'25%'}}>
     <TouchableOpacity style={{height:80,backgroundColor:'green'}} onPress={()=>props.navigation.navigate('Home')}>
         <Text>Home</Text>
@@ -72,7 +83,7 @@ function Diary(props) {
     </View>
 
     <View style={{width:'25%'}}>
-      <TouchableOpacity style={{height:80,backgroundColor:'blue'}} onPress={()=>props.navigation.navigate('diary')}>
+      <TouchableOpacity style={{height:80,backgroundColor:'blue'}} onPress={()=>props.navigation.navigate('prevnotes')}>
         <Text style={{color:'white',fontSize:20}}>Diary</Text>
         </TouchableOpacity>  
     </View>
