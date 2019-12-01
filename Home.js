@@ -14,22 +14,24 @@ import Diary from './src/Components/Diary.js';
 import Dashboard from './src/Components/Dashboard.js';
 import HomeScreen from './src/Components/HomeScreen.js';
 
-import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
+//import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
 
-class Home extends Component {
+function Home (props) {
 
-  static navigationOptions = {
+ /* static navigationOptions = {
     // headerLeft: <Image source={logo} style={{ width: 50, height: 50, paddingLeft: 10 }} />,
     title: 'Smile A While',
-  }
+  }*/
+
+  // constructor(props){
+  //   super(props)
+  // }
 
 
-
-
-  render() {
+  // render(props) {
 
     
-const TabBarComponent = props => <BottomTabBar {...props} />;
+/*const TabBarComponent = props => <BottomTabBar {...props} />;
 
 const TabScreens = createBottomTabNavigator(
   {
@@ -129,18 +131,18 @@ const TabScreens = createBottomTabNavigator(
 
 
     return (
+<View>
 
+<Button title="click" onPress={()=>props.navigation.navigate('dashboard')}>Hello another world</Button>
+<Button title="click" onPress={()=>props.navigation.navigate('diary')}>Hello another world</Button>
 
-      <TabScreens />
-
-
-
+</View>
 
 
 
     );
   }
-}
+
 
 
 export default Home;
