@@ -9,8 +9,8 @@ function Diary(props) {
         CreateNote:{
             
             fontSize:25,
-     
-            height:550,
+        
+            height:400,
              
             backfaceVisibility:'visible',         
         },

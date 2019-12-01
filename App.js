@@ -17,6 +17,7 @@ import Diary from './src/Components/Diary.js';
 import Dashboard from './src/Components/Dashboard.js';
 import Navbar from "./src/Components/Navbar"
 import Prevnotes from "./src/Components/Prevnotes"
+import Emergency from "./src/Components/seekhelp.js"
 // import Save from '.src/Components/Diary'
 
 
@@ -48,6 +49,7 @@ const AppNavigator = createStackNavigator({
     //  },
   },
   dashboard:Dashboard,
+  emergency:Emergency,
   Happy:Happy,
   Bored:Bored,
   Sad:Sad,
