@@ -24,7 +24,7 @@ import Navbar from './src/Components/Navbar';
 import Emergency from './src/Components/seekhelp.js';
 import logo from './images/Homescreen.jpg';
 import users from './images/users.png';
-
+import Feed from "./src/Components/Feed/Feed.js"
 function Home(props) {
   const styles = StyleSheet.create({
     container: {
@@ -64,10 +64,7 @@ function Home(props) {
       backgroundColor: 'white',
       alignItems: 'center',
     },
-    footer: {
-      top: 90,
-      bottom: 0,
-    },
+    
     header: {
       top: 0,
       bottom: 90,
@@ -95,46 +92,50 @@ function Home(props) {
         </View>
       </View>
 
-      <Image source={logo} style={styles.logo} />
+    <ScrollView style={{marginVertical:50}}>
+          <Image source={logo} style={styles.logo} />
 
-      <View style={styles.footer}>
-        <View
-          style={{
-            top: 10,
-            position: 'relative',
-            flex: 1,
-            flexDirection: 'row',
-          }}>
-          <View style={{width: '25%'}}>
-            <TouchableOpacity
-              style={styles.buttons}
-              onPress={() => props.navigation.navigate('media')}>
-              <Image source={homeicon} style={{width: 40, height: 40}} />
-            </TouchableOpacity>
-          </View>
-          <View style={{width: '25%'}}>
-            <TouchableOpacity
-              style={styles.buttons}
-              onPress={() => props.navigation.navigate('prevnotes')}>
-              <Image source={diarylogo} style={{width: 40, height: 40}} />
-            </TouchableOpacity>
-          </View>
+          <Feed/>
+          
+      </ScrollView>
+            <View
+              style={{
+                
+                position: 'absolute',
+                bottom:10,
+                flex: 1,
+                flexDirection: 'row',
+              }}>
+              <View style={{width: '25%'}}>
+                <TouchableOpacity
+                  style={styles.buttons}
+                  onPress={() => props.navigation.navigate('media')}>
+                  <Image source={homeicon} style={{width: 40, height: 40}} />
+                </TouchableOpacity>
+              </View>
+              <View style={{width: '25%'}}>
+                <TouchableOpacity
+                  style={styles.buttons}
+                  onPress={() => props.navigation.navigate('prevnotes')}>
+                  <Image source={diarylogo} style={{width: 40, height: 40}} />
+                </TouchableOpacity>
+              </View>
 
-          <View style={{width: '25%'}}>
-            <TouchableOpacity style={styles.buttons}>
-              <Image source={users} style={{width: 40, height: 40}} />
-            </TouchableOpacity>
-          </View>
+              <View style={{width: '25%'}}>
+                <TouchableOpacity style={styles.buttons}>
+                  <Image source={users} style={{width: 40, height: 40}} />
+                </TouchableOpacity>
+              </View>
 
-          <View style={{width: '25%'}}>
-            <TouchableOpacity
-              style={styles.buttons}
-              onPress={() => props.navigation.navigate('emergency')}>
-              <Image source={lifesaver} style={{width: 35, height: 35}} />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
+              <View style={{width: '25%'}}>
+                <TouchableOpacity
+                  style={styles.buttons}
+                  onPress={() => props.navigation.navigate('emergency')}>
+                  <Image source={lifesaver} style={{width: 35, height: 35}} />
+                </TouchableOpacity>
+              </View>
+            </View>
+         
     </View>
   );
 }
