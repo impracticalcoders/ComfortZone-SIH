@@ -11,10 +11,13 @@ import {
 } from 'react-native';
 
 function Prevnotes(props) {
+
   const [dataList, sdt] = useState([]);
+  
   AsyncStorage.getItem('notes').then(res => {
     sdt(JSON.parse(res));
-  }).finally((e)=>console.log(e));
+  }).finally(()=>{});
+
   return (
     <View style={{marginTop: 20, marginBottom: 20}}>
       <Button
