@@ -4,8 +4,8 @@ import {ScrollView,Text,View,} from "react-native"
 import { Card, Button, Icon} from 'react-native-elements'
 
 
-function FeedItem(){
-    const [smilies,setSimilies] = useState(0)
+function FeedItem(props){
+    const [smilies,setSimilies] = useState(props.smilies)
 
     return(
     <View style={{
@@ -14,7 +14,7 @@ function FeedItem(){
         marginBottom:10
     }}>
     <Card>
-        <Text style={{marginBottom:10}}>hello this is your feed item</Text>    
+        <Text style={{marginBottom:10}}>{props.text}</Text>    
         
         <View style={{display:'flex',flexDirection:'row',width:"100%",}}>
             <Button 
