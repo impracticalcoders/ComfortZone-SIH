@@ -1,6 +1,6 @@
 import React,{useState} from "react"
 
-import {ScrollView,} from "react-native"
+import {ScrollView,FlatList} from "react-native"
 import FeedItem from "./FeedItem"
 import database, { firebase } from '@react-native-firebase/database';
 
@@ -13,36 +13,41 @@ function feed(){
         const key = database().ref('feed').push().key
 
         const dat ={
-            "text":"Good morning",
-            "smilies":6
+            "id":key,
+            "text":"Peace",
+            "smilies":1
         }
         const data ={}
         data[key]= dat
 
         database().ref('feed').update(data)
     }
-   
+    
     const getData=()=>{
         if(!flag)
         database().ref('feed').once('value')
             .then(dataSnapshot=>{
                 const data =dataSnapshot.val()
-                console.log(data)
-                const dataList=[]
+                const dataArray=[]
                 for(let el in data){
-                    dataList.push(<FeedItem key = {el} text = {data[el].text} smilies = {data[el].smilies}/>)
+                    dataArray.push(data[el])
                 }
+                console.log(data)
+                
 
                 // console.log(dataList)
                 setFlag(true)
-                setFeedList(dataList)
+                setFeedList(dataArray)
             })
     }
     getData()
    return(
-    <ScrollView>
-        {FeedList}
-    </ScrollView>)
+    <FlatList
+        data = {FeedList}
+        renderItem={({item})=><FeedItem key = {item.id} text = {item.text} smilies = {item.smilies}/>}
+        keyExtractor={item=>item.id}
+        >
+    </FlatList>)
 }
 
 export default feed
