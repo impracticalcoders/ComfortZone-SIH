@@ -12,12 +12,16 @@ import {
 
 function Prevnotes(props) {
 
-  const [dataList, sdt] = useState([]);
+  const [dataList, sdt] = useState(['']);
   
-  AsyncStorage.getItem('notes').then(res => {
-    sdt(JSON.parse(res));
-  }).finally(()=>{});
-
+    AsyncStorage.getItem('notes').then(res => {
+     console.log(res)
+      if(res===null)
+        res="[]"
+      sdt(JSON.parse(res));
+    })
+  
+  
   return (
     <View style={{marginTop: 20, marginBottom: 20}}>
       <Button

@@ -96,6 +96,8 @@ function Diary(props) {
             AsyncStorage.getItem('moods').then(res=>{
             mooddata = JSON.parse(res) 
             console.log(mooddata)
+            if(mooddata===null)
+              mooddata=[]
             mooddata.push(word)
             AsyncStorage.setItem('moods',JSON.stringify(mooddata))
         })
@@ -108,8 +110,11 @@ function Diary(props) {
        
         AsyncStorage.getItem('notes').then(res=>{
             data = JSON.parse(res) 
-            console.log(data)
+            
+            if(data===null)
+            data=[]
             data.push(NoteText)
+            console.log(data)
             AsyncStorage.setItem('notes',JSON.stringify(data))
         })
 

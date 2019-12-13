@@ -101,14 +101,14 @@ function Home(props) {
 
 
     {/* image and feed */}
-    <View style={{height:500}}>
-      <ScrollView >
+    <View style={{height:"78%"}}>
+    
       
       {/* <Image source={logo} style={styles.logo} /> */}
 
       <Feed/>
       
-      </ScrollView>
+     
     </View>
 
 
