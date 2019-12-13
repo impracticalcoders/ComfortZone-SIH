@@ -5,26 +5,21 @@ import {
   StyleSheet,
   Text,
   View,
+  TextInput,
   Button,
   StatusBar,
   Image,
   TouchableOpacity,
 } from 'react-native';
 
-import {Icon} from 'native-base';
 import diarylogo from './images/diaryicon.jpg';
-import entertainlogo from './images/movies.png';
 import lifesaver from './images/lifesaver.png';
 import homeicon from './images/homeicon.png';
-import {TabNavigator} from 'react-navigation';
-import Diary from './src/Components/Diary.js';
-import Dashboard from './src/Components/Dashboard.js';
-import HomeScreen from './src/Components/HomeScreen.js';
-import Navbar from './src/Components/Navbar';
-import Emergency from './src/Components/seekhelp.js';
+
 import logo from './images/Homescreen.jpg';
 import users from './images/users.png';
 import Feed from "./src/Components/Feed/Feed.js"
+
 function Home(props) {
   const styles = StyleSheet.create({
     container: {
@@ -73,10 +68,13 @@ function Home(props) {
 
   return (
     <View>
+
+
+
+    {/* Online Offline */}
       <View
         style={{
-          top: 10,
-          position: 'relative',
+          marginTop:10,
           flex: 1,
           flexDirection: 'row',
         }}>
@@ -92,50 +90,72 @@ function Home(props) {
         </View>
       </View>
 
-    <ScrollView style={{marginVertical:50}}>
-          <Image source={logo} style={styles.logo} />
 
-          <Feed/>
-          
+      {/* text box */}
+      
+      <View style={{marginTop:30,marginBottom:10}}>
+      <TextInput multiline={true} style={{fontSize:20,borderColor:'gray',borderWidth:2,marginTop:10,marginBottom:-10,padding:10}} placeholder='enter your feelings'>hel</TextInput>  
+      </View>
+    
+
+
+
+    {/* image and feed */}
+    <View style={{height:500}}>
+      <ScrollView >
+      
+      {/* <Image source={logo} style={styles.logo} /> */}
+
+      <Feed/>
+      
       </ScrollView>
-            <View
-              style={{
-                
-                position: 'absolute',
-                bottom:10,
-                flex: 1,
-                flexDirection: 'row',
-              }}>
-              <View style={{width: '25%'}}>
-                <TouchableOpacity
-                  style={styles.buttons}
-                  onPress={() => props.navigation.navigate('media')}>
-                  <Image source={homeicon} style={{width: 40, height: 40}} />
-                </TouchableOpacity>
-              </View>
-              <View style={{width: '25%'}}>
-                <TouchableOpacity
-                  style={styles.buttons}
-                  onPress={() => props.navigation.navigate('prevnotes')}>
-                  <Image source={diarylogo} style={{width: 40, height: 40}} />
-                </TouchableOpacity>
-              </View>
+    </View>
 
-              <View style={{width: '25%'}}>
-                <TouchableOpacity style={styles.buttons}>
-                  <Image source={users} style={{width: 40, height: 40}} />
-                </TouchableOpacity>
-              </View>
 
-              <View style={{width: '25%'}}>
-                <TouchableOpacity
-                  style={styles.buttons}
-                  onPress={() => props.navigation.navigate('emergency')}>
-                  <Image source={lifesaver} style={{width: 35, height: 35}} />
-                </TouchableOpacity>
-              </View>
-            </View>
-         
+
+
+    {/* Navbar */}
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+        }}>
+        <View style={{width: '25%'}}>
+          <TouchableOpacity
+            style={styles.buttons}
+            onPress={() => props.navigation.navigate('media')}>
+            <Image source={homeicon} style={{width: 40, height: 40}} />
+          </TouchableOpacity>
+        </View>
+        <View style={{width: '25%'}}>
+          <TouchableOpacity
+            style={styles.buttons}
+            onPress={() => props.navigation.navigate('prevnotes')}>
+            <Image source={diarylogo} style={{width: 40, height: 40}} />
+          </TouchableOpacity>
+        </View>
+
+        <View style={{width: '25%'}}>
+          <TouchableOpacity style={styles.buttons}>
+            <Image source={users} style={{width: 40, height: 40}} />
+          </TouchableOpacity>
+        </View>
+
+        <View style={{width: '25%'}}>
+          <TouchableOpacity
+            style={styles.buttons}
+            onPress={() => props.navigation.navigate('emergency')}>
+            <Image source={lifesaver} style={{width: 35, height: 35}} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    
+    
+
+  
+    
+    
+    
     </View>
   );
 }
