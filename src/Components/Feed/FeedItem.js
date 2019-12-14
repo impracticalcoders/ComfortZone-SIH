@@ -3,10 +3,21 @@ import React, {useState} from "react"
 import {ScrollView, Text, View} from "react-native"
 import {Card, Button, Icon} from 'react-native-elements'
 import database, {firebase} from '@react-native-firebase/database';
-import  AsyncStorage from "@react-native-community/async-storage"
+import AsyncStorage from "@react-native-community/async-storage"
 function FeedItem(props) {
     const [smilies, setSimilies] = useState(props.smilies)
     const [flag, setFlag] = useState(false)
+    const [smiliesColor, setSmiliesColor] = useState("gray")
+    AsyncStorage
+        .getItem('smilies/' + props.id)
+        .then(res => {
+            if (res === null) {
+                AsyncStorage.setItem('smilies/' + props.id, JSON.stringify(false))
+            } else {
+                const val = JSON.parse(res)
+                setFlag(val)
+            }
+        })
     const updateSmilies = () => {
         if (!flag) {
             database()
@@ -16,7 +27,20 @@ function FeedItem(props) {
                     "smilies": smilies + 1
                 })
             setFlag(true)
+            AsyncStorage.setItem('smilies/' + props.id, JSON.stringify(true))
+            setSmiliesColor('green')
             setSimilies(smilies + 1)
+        } else {
+            database()
+                .ref('feed')
+                .child(props.id.toString())
+                .update({
+                    "smilies": smilies - 1
+                })
+            setFlag(false)
+            AsyncStorage.setItem('smilies/' + props.id, JSON.stringify(false))
+            setSmiliesColor('gray')
+            setSimilies(smilies - 1)
         }
     }
     return (
@@ -48,7 +72,9 @@ function FeedItem(props) {
                         size = {
                             40
                         }
-                        color = "green"
+                        color = {
+                            smiliesColor
+                        }
                         />}
                         onPress={updateSmilies}></Button>
 
