@@ -90,7 +90,13 @@ function Home(props) {
         </View>
         <View style={{width: '50%'}}>
           <TouchableOpacity style={styles.buttons}>
-            <Text style={{textAlign: 'center', fontSize: 15}}> Offline</Text>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 15,
+              }}>
+              Offline
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
