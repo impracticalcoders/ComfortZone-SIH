@@ -17,7 +17,6 @@ import {Button} from "react-native-elements"
 import diarylogo from './images/diaryicon.jpg';
 import lifesaver from './images/lifesaver.png';
 import homeicon from './images/homeicon.png';
-import SlideUp from "./src/Components/Animated Components/SlideUp"
 import logo from './images/Homescreen.jpg';
 import users from './images/users.png';
 import Feed from "./src/Components/Feed/Feed.js"
@@ -70,10 +69,9 @@ function Home(props) {
     });
     const screenHeight = Math.round(Dimensions.get('window').height);
     const screenWidth = Math.round(Dimensions.get('window').width);
-
     return (
         <View>
-
+           
             <View
                 style={{
                     marginTop: 10,
@@ -123,20 +121,20 @@ function Home(props) {
                         padding: 10,
                         borderRadius: 30
                     }}
-                    onPress={() => alert('do not touch me')}
-                    title='Express your feelings here'></Button>
+                    onPress={() => props.navigation.navigate('addfeeditem')}
 
+                    title='Express your feelings here'></Button>
             </View>
 
             <View style={{
                     height: "78%"
                 }}>
+
                 {/* <Image source={logo} style={styles.logo} /> */}
-                {/* <SlideUp/> */}
+
                 <Feed/>
             </View>
 
-            <View ></View>
             <View
                 style={{
                     flex: 1,
@@ -199,7 +197,6 @@ function Home(props) {
                     </TouchableOpacity>
                 </View>
             </View>
-
         </View>
     );
 }
