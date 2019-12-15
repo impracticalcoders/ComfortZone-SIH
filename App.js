@@ -20,6 +20,7 @@ import Prevnotes from './src/Components/Prevnotes';
 import Emergency from './src/Components/seekhelp.js';
 import Metime from './src/Components/Metime';
 import Media from './src/Components/Media';
+import Addfeeditem from "./src/Components/Feed/AddfeedItem"
 // import Save from '.src/Components/Diary'
 
 /*export default class App extends React.Component{
@@ -56,6 +57,7 @@ const AppNavigator = createStackNavigator({
   emergency: Emergency,
   Happy: Happy,
   Bored: Bored,
+  addfeeditem:Addfeeditem,
   Sad: Sad,
   Fear: Fear,
   Angry: Angry,

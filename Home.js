@@ -17,7 +17,6 @@ import {Button} from 'react-native-elements';
 import diarylogo from './images/diaryicon.png';
 import lifesaver from './images/lifesaver.png';
 import homeicon from './images/homeicon.png';
-
 import logo from './images/Homescreen.jpg';
 import users from './images/users.png';
 import Feed from './src/Components/Feed/Feed.js';
@@ -133,7 +132,7 @@ function Home(props) {
             borderRadius: 30,
             color: '#c63f17S',
           }}
-          onPress={() => alert('do not touch me')}
+          onPress={() => props.navigation.navigate('addfeeditem')}
           title="Express your feelings here"></Button>
       </View>
 
