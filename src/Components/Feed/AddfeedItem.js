@@ -7,7 +7,7 @@ import {Icon} from "native-base";
 function Addfeeditem(props) {
 
     const [selectedEmotions, setSelectedEmotions] = useState({
-        happy: 30,
+        happy: false,
         sad: false,
         angry: false,
         excited: false,
