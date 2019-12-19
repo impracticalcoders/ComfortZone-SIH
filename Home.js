@@ -145,7 +145,6 @@ function Home(props) {
                 <Feed/>
             </View>
 
-            <View></View>
             <View
                 style={{
                     flex: 1,
