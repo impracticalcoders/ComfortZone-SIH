@@ -130,7 +130,7 @@ function Diary(props) {
   return (
     <View>
       <TextInput
-        multiline="multiline"
+        multiline={true}
         style={style.CreateNote}
         placeholder="how are you feeling"
         onChangeText={text => setnt(text.toString())}
