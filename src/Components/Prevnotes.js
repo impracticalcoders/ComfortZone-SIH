@@ -7,18 +7,22 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  AsyncStorage,
+  
 } from 'react-native';
+import AsyncStorage from "@react-native-community/async-storage"
 
 function Prevnotes(props) {
   const [dataList, sdt] = useState(['']);
-
+  const [flag,setFlag] = useState(false)
+  if(!flag)
   AsyncStorage.getItem('notes').then(res => {
     console.log(res);
     if (res === null) res = '[]';
     sdt(JSON.parse(res));
-  });
-
+    setFlag(true)
+  })
+  
+  
   return (
     <View
       style={{
