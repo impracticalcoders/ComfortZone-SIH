@@ -23,48 +23,17 @@ import Feed from './src/Components/Feed/Feed.js';
 
 function Home(props) {
     const styles = StyleSheet.create({
-        container: {
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#f7e892'
-        },
-        parent: {
-            height: '100%',
-            marginTop: 20,
-            alignItems: 'center'
-        },
-        title: {
-            fontSize: 30
-        },
-        logo: {
-            marginTop: 50,
-            height: 400,
-            width: '100%',
-            opacity: 1
-        },
-        welcome: {
-            fontSize: 20,
-            textAlign: 'center',
-            margin: 10,
-            marginBottom: 50,
-            color: 'black'
-        },
-        MotivationalQuote: {
-            padding: 20,
-            top: 20
-        },
+       
         buttons: {
             marginVertical: 4,
             marginHorizontal: 4,
             height: 40,
             backgroundColor: 'white',
-            alignItems: 'center'
+            alignItems: 'center',
+            
         },
 
-        header: {
-            top: 0,
-            bottom: 90
-        }
+       
     });
     const screenHeight = Math.round(Dimensions.get('window').height);
     const screenWidth = Math.round(Dimensions.get('window').width);
@@ -82,7 +51,9 @@ function Home(props) {
                     }}>
                     <TouchableOpacity
                         style={(styles.buttons, {
-                            backgroundColor: '#F17828',
+                            backgroundColor: 'white',
+                            shadowColor:'gray',
+                            elevation:3,
                             height: 35
                         })}>
                         <Text
@@ -100,7 +71,9 @@ function Home(props) {
                     }}>
                     <TouchableOpacity
                         style={(styles.buttons, {
-                            backgroundColor: '#F17828',
+                            backgroundColor: 'white',
+                            shadowColor:'gray',
+                            elevation:3,
                             height: 35
                         })}>
                         <Text
@@ -123,17 +96,7 @@ function Home(props) {
                     marginRight: 10
                 }}>
                 <Button
-                    color="#c63f17"
-                    style={{
-                        fontSize: 20,
-                        borderColor: 'gray',
-                        borderWidth: 2,
-                        marginTop: 10,
-                        marginBottom: -10,
-                        padding: 10,
-                        borderRadius: 30,
-                        color: '#c63f17S'
-                    }}
+                    
                     onPress={() => props.navigation.navigate('addfeeditem')}
                     title="Express your feelings here"></Button>
             </View>
@@ -148,7 +111,7 @@ function Home(props) {
             <View
                 style={{
                     flex: 1,
-                    flexDirection: 'row'
+                    flexDirection: 'row',
                 }}>
                 <View style={{
                         width: '25%'
@@ -197,6 +160,7 @@ function Home(props) {
                     }}>
                     <TouchableOpacity
                         style={styles.buttons}
+                        
                         onPress={() => props.navigation.navigate('emergency')}>
                         <Image
                             source={lifesaver}

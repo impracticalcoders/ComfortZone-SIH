@@ -19,7 +19,7 @@ function Diary(props) {
     CreateNote: {
       fontSize: 25,
 
-      height: 400,
+      height: "80%",
 
       backfaceVisibility: 'visible',
     },
@@ -134,6 +134,7 @@ function Diary(props) {
         style={style.CreateNote}
         placeholder="how are you feeling"
         onChangeText={text => setnt(text.toString())}
+        
       />
 
       <View
