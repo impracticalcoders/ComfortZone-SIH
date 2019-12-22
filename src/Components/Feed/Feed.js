@@ -98,7 +98,6 @@ function feed() {
                     // moods = dataArray.get(data[el])
                     if (dataArray.get(el) === undefined) {
                         dataEl['moods'] = ['happy']
-                        getData()
                         dataArray.set(el, dataEl)
                     } else 
                         dataArray
@@ -134,7 +133,7 @@ function feed() {
     }, [])
 
     if (FeedList.size === 0) 
-        return (<FeedItem key={1} id={1} text="Feed Loading" smilies={0} moods=""/>)
+        return (<FeedItem key={1} id={1} text="Feed Loading" smilies={0} moods={[]}/>)
     else 
         return (
             <FlatList
@@ -152,7 +151,7 @@ function feed() {
                     item.smilies
                 }
                 moods = {
-                    JSON.stringify(item.moods)
+                    item.moods
                 } />}
                 keyExtractor={item => item
                     .id

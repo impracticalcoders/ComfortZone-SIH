@@ -8,11 +8,12 @@ function FeedItem(props) {
     const [smilies, setSimilies] = useState(props.smilies)
     const [flag, setFlag] = useState(false)
     const [smiliesColor, setSmiliesColor] = useState("gray")
-    const moods = JSON.parse(props.moods)
+    let moods=[]
+     moods = props.moods
     AsyncStorage
         .getItem('smilies/' + props.id)
         .then(res => {
-            if (res === null) {
+            if (res === null || res=== undefined) {
                 AsyncStorage.setItem('smilies/' + props.id, JSON.stringify(false))
             } else {
                 const val = JSON.parse(res)
