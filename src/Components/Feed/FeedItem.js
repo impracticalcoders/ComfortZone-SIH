@@ -8,7 +8,7 @@ function FeedItem(props) {
     const [smilies, setSimilies] = useState(props.smilies)
     const [flag, setFlag] = useState(false)
     const [smiliesColor, setSmiliesColor] = useState("gray")
-
+    const moods = JSON.parse(props.moods)
     AsyncStorage
         .getItem('smilies/' + props.id)
         .then(res => {
@@ -24,28 +24,30 @@ function FeedItem(props) {
             }
         })
     const updateSmilies = () => {
-        if (!flag) {
-            database()
-                .ref('feed')
-                .child(props.id.toString())
-                .update({
-                    "smilies": smilies + 1
-                })
-            setFlag(true)
-            AsyncStorage.setItem('smilies/' + props.id, JSON.stringify(true))
-            setSmiliesColor('green')
-            setSimilies(smilies + 1)
-        } else {
-            database()
-                .ref('feed')
-                .child(props.id.toString())
-                .update({
-                    "smilies": smilies - 1
-                })
-            setFlag(false)
-            AsyncStorage.setItem('smilies/' + props.id, JSON.stringify(false))
-            setSmiliesColor('gray')
-            setSimilies(smilies - 1)
+        for (let el in moods) {
+            if (!flag) {
+                database()
+                    .ref('feed/'+moods[el])
+                    .child(props.id.toString())
+                    .update({
+                        "smilies": smilies + 1
+                    })
+                setFlag(true)
+                AsyncStorage.setItem('smilies/' + props.id, JSON.stringify(true))
+                setSmiliesColor('green')
+                setSimilies(smilies + 1)
+            } else {
+                database()
+                    .ref('feed/'+moods[el])
+                    .child(props.id.toString())
+                    .update({
+                        "smilies": smilies - 1
+                    })
+                setFlag(false)
+                AsyncStorage.setItem('smilies/' + props.id, JSON.stringify(false))
+                setSmiliesColor('gray')
+                setSimilies(smilies - 1)
+            }
         }
     }
     return (
@@ -90,6 +92,7 @@ function FeedItem(props) {
                             left: 40
                         }}>{smilies}</Text>
                 </View>
+                <Text>{moods.map(el => el + '  ')}</Text>
             </Card>
 
         </View>
