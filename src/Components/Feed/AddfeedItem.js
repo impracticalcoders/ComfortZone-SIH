@@ -3,7 +3,6 @@ import {View, TouchableOpacity, Switch} from "react-native"
 import {Text, Button, Input, CheckBox} from "react-native-elements"
 import database from '@react-native-firebase/database';
 
-import {Icon} from "native-base";
 function Addfeeditem(props) {
 
     const [selectedEmotions, setSelectedEmotions] = useState({
@@ -16,11 +15,23 @@ function Addfeeditem(props) {
     })
 
     const [text, setText] = useState("")
+
+    let NOSE = []
+    for(let el in selectedEmotions){
+            if(selectedEmotions[el]===true)
+            NOSE.push(el)
+    }
+    console.log(NOSE)
+    
     const postToFeed = () => {
+
+
         const key = database()
             .ref('feed')
             .push()
             .key
+
+        
         const data = {
             "id": key,
             "smilies": 0,
@@ -29,9 +40,12 @@ function Addfeeditem(props) {
         const dat = {}
         dat[key] = data
 
-        database()
-            .ref('feed')
+        for(let el in NOSE){
+            database()
+            .ref('feed/'+NOSE[el])
             .update(dat)
+        }
+        
         alert('posted')
         props
             .navigation
@@ -187,6 +201,7 @@ function Addfeeditem(props) {
 
             </View>
 
+            
             <Button title="Post" onPress={postToFeed}/>
 
         </View>
