@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react"
-import {View, TouchableOpacity, Switch} from "react-native"
+import React, {useState, useEffect, useLayoutEffect} from "react"
+import {View, TouchableOpacity, Dimensions, KeyboardAvoidingView} from "react-native"
 import {Text, Button, Input, CheckBox} from "react-native-elements"
 import database from '@react-native-firebase/database';
 
@@ -13,25 +13,24 @@ function Addfeeditem(props) {
         fear: false,
         bored: false
     })
+    const screenHeight = Math.round(Dimensions.get('window').height);
 
     const [text, setText] = useState("")
 
     let NOSE = []
-    for(let el in selectedEmotions){
-            if(selectedEmotions[el]===true)
+    for (let el in selectedEmotions) {
+        if (selectedEmotions[el] === true) 
             NOSE.push(el)
     }
     console.log(NOSE)
-    
-    const postToFeed = () => {
 
+    const postToFeed = () => {
 
         const key = database()
             .ref('feed')
             .push()
             .key
 
-        
         const data = {
             "id": key,
             "smilies": 0,
@@ -40,12 +39,12 @@ function Addfeeditem(props) {
         const dat = {}
         dat[key] = data
 
-        for(let el in NOSE){
+        for (let el in NOSE) {
             database()
-            .ref('feed/'+NOSE[el])
-            .update(dat)
+                .ref('feed/' + NOSE[el])
+                .update(dat)
         }
-        
+
         alert('posted')
         props
             .navigation
@@ -53,158 +52,160 @@ function Addfeeditem(props) {
 
     }
     return (
-        <View>
-
-            <Input
-                multiline={true}
-                placeholder="Write something good about yourself"
-                onChangeText={(text) => setText(text.toString())}
-                containerStyle={{
-                    minHeight: "65%",
-                    maxHeight: "80%"
-                }}/>
+        <KeyboardAvoidingView style={{
+                flex: 1
+            }}>
             <View
                 style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    marginBottom: 20
+                    maxHeight: '95%',
+                    minHeight: '85%'
                 }}>
+                <Input
+                    multiline={true}
+                    placeholder="Write something good about yourself"
+                    numberOfLines={8}
+                    onChangeText={(text) => setText(text.toString())}/>
                 <View
                     style={{
-                        width: '16.66%',
-                        alignItems: 'center'
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        marginBottom: 20
                     }}>
-                    <TouchableOpacity
-                        onPress={() => setSelectedEmotions({
-                            ...selectedEmotions,
-                            happy: selectedEmotions.happy
-                                ? false
-                                : true
-                        })}>
-                        <Text
-                            style={{
-                                fontSize: selectedEmotions.happy
-                                    ? 40
-                                    : 30
-                            }}>🙂</Text>
-                    </TouchableOpacity>
+                    <View
+                        style={{
+                            width: '16.66%',
+                            alignItems: 'center'
+                        }}>
+                        <TouchableOpacity
+                            onPress={() => setSelectedEmotions({
+                                ...selectedEmotions,
+                                happy: selectedEmotions.happy
+                                    ? false
+                                    : true
+                            })}>
+                            <Text
+                                style={{
+                                    fontSize: selectedEmotions.happy
+                                        ? 40
+                                        : 30
+                                }}>🙂</Text>
+                        </TouchableOpacity>
+
+                    </View>
+
+                    <View
+                        style={{
+                            width: '16.66%',
+                            alignItems: 'center'
+                        }}>
+                        <TouchableOpacity
+                            onPress={() => setSelectedEmotions({
+                                ...selectedEmotions,
+                                sad: selectedEmotions.sad
+                                    ? false
+                                    : true
+                            })}>
+                            <Text
+                                style={{
+                                    fontSize: selectedEmotions.sad
+                                        ? 40
+                                        : 30
+                                }}>😔</Text>
+                        </TouchableOpacity>
+
+                    </View>
+                    <View
+                        style={{
+                            width: '16.66%',
+                            alignItems: 'center'
+                        }}>
+                        <TouchableOpacity
+                            onPress={() => setSelectedEmotions({
+                                ...selectedEmotions,
+                                angry: selectedEmotions.angry
+                                    ? false
+                                    : true
+                            })}>
+                            <Text
+                                style={{
+                                    fontSize: selectedEmotions.angry
+                                        ? 40
+                                        : 30
+                                }}>😠</Text>
+                        </TouchableOpacity>
+
+                    </View>
+                    <View
+                        style={{
+                            width: '16.66%',
+                            alignItems: 'center'
+                        }}>
+                        <TouchableOpacity
+                            onPress={() => setSelectedEmotions({
+                                ...selectedEmotions,
+                                fear: selectedEmotions.fear
+                                    ? false
+                                    : true
+                            })}>
+                            <Text
+                                style={{
+                                    fontSize: selectedEmotions.fear
+                                        ? 40
+                                        : 30
+                                }}>😨</Text>
+                        </TouchableOpacity>
+
+                    </View>
+                    <View
+                        style={{
+                            width: '16.66%',
+                            alignItems: 'center'
+                        }}>
+                        <TouchableOpacity
+                            onPress={() => setSelectedEmotions({
+                                ...selectedEmotions,
+                                excited: selectedEmotions.excited
+                                    ? false
+                                    : true
+                            })}>
+                            <Text
+                                style={{
+                                    fontSize: selectedEmotions.excited
+                                        ? 40
+                                        : 30
+                                }}>🤩</Text>
+                        </TouchableOpacity>
+
+                    </View>
+                    <View
+                        style={{
+                            width: '16.66%',
+                            alignItems: 'center'
+                        }}>
+                        <TouchableOpacity
+                            onPress={() => setSelectedEmotions({
+                                ...selectedEmotions,
+                                bored: selectedEmotions.bored
+                                    ? false
+                                    : true
+                            })}>
+                            <Text
+                                style={{
+                                    fontSize: selectedEmotions.bored
+                                        ? 40
+                                        : 30
+                                }}>😴</Text>
+                        </TouchableOpacity>
+
+                    </View>
 
                 </View>
-
-                
-                <View
-                    style={{
-                        width: '16.66%',
-                        alignItems: 'center'
-                    }}>
-                    <TouchableOpacity
-                        onPress={() => setSelectedEmotions({
-                            ...selectedEmotions,
-                            sad: selectedEmotions.sad
-                                ? false
-                                : true
-                        })}>
-                        <Text
-                            style={{
-                                fontSize: selectedEmotions.sad
-                                    ? 40
-                                    : 30
-                            }}>😔</Text>
-                    </TouchableOpacity>
-
-                </View>
-                <View
-                    style={{
-                        width: '16.66%',
-                        alignItems: 'center'
-                    }}>
-                    <TouchableOpacity
-                        onPress={() => setSelectedEmotions({
-                            ...selectedEmotions,
-                            angry: selectedEmotions.angry
-                                ? false
-                                : true
-                        })}>
-                        <Text
-                            style={{
-                                fontSize: selectedEmotions.angry
-                                    ? 40
-                                    : 30
-                            }}>😠</Text>
-                    </TouchableOpacity>
-
-                </View>
-                <View
-                    style={{
-                        width: '16.66%',
-                        alignItems: 'center'
-                    }}>
-                    <TouchableOpacity
-                        onPress={() => setSelectedEmotions({
-                            ...selectedEmotions,
-                            fear: selectedEmotions.fear
-                                ? false
-                                : true
-                        })}>
-                        <Text
-                            style={{
-                                fontSize: selectedEmotions.fear
-                                    ? 40    
-                                    : 30
-                            }}>😨</Text>
-                    </TouchableOpacity>
-
-                </View>
-                <View
-                    style={{
-                        width: '16.66%',
-                        alignItems: 'center'
-                    }}>
-                    <TouchableOpacity
-                        onPress={() => setSelectedEmotions({
-                            ...selectedEmotions,
-                            excited: selectedEmotions.excited
-                                ? false
-                                : true
-                        })}>
-                        <Text
-                            style={{
-                                fontSize: selectedEmotions.excited
-                                    ? 40
-                                    : 30
-                            }}>🤩</Text>
-                    </TouchableOpacity>
-
-                </View>
-                <View
-                    style={{
-                        width: '16.66%',
-                        alignItems: 'center'
-                    }}>
-                    <TouchableOpacity
-                        onPress={() => setSelectedEmotions({
-                            ...selectedEmotions,
-                            bored: selectedEmotions.bored
-                                ? false
-                                : true
-                        })}>
-                        <Text
-                            style={{
-                                fontSize: selectedEmotions.bored
-                                    ? 40
-                                    : 30
-                            }}>😴</Text>
-                    </TouchableOpacity>
-
-                </View>
-                
-
             </View>
 
-            
-            <Button title="Post" onPress={postToFeed}/>
-
-        </View>
+            <View style={{}}>
+                <Button title="Post" onPress={postToFeed}/>
+            </View>
+        </KeyboardAvoidingView>
     )
 }
 
