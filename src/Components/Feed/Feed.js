@@ -1,16 +1,57 @@
 import React, {useState, useEffect} from "react"
 
-import {ScrollView, FlatList, Text} from "react-native"
+import {ScrollView, FlatList, Text, View} from "react-native"
 import FeedItem from "./FeedItem"
 import database, {firebase} from '@react-native-firebase/database';
-
+import Emotions from "../emotions/Emotions"
 function feed() {
 
     const [FeedList, setFeedList] = useState(new Map())
+    let [OriginalFeedList,setOriginalFeedList] = useState(new Map())
+    const [FeedListEmotions, setFeedListEmotions] = useState({})
+    const [selectedEmotions, setSelectedEmotions] = useState({
+        happy: true,
+        sad: true,
+        angry: true,
+        excited: true,
+        fear: true,
+        bored: true
+    })
+
+    const getEmotionsFromChild = (props) => {
+        setSelectedEmotions(props)
+
+    }
+
+    useEffect(() => {
+      
+        // for(let [key,val] of FeedList){
+            console.log(FeedListEmotions)
+            let e = 'hi'
+
+        // 
+        let tempMap = new Map()
+        for(let emotion in selectedEmotions){
+           if(selectedEmotions[emotion])
+            for(let [key,val] of OriginalFeedList){
+                console.log(FeedListEmotions[`${key}:${emotion}`] + ` ${emotion}`)
+                if(FeedListEmotions[`${key}:${emotion}`]){
+                    tempMap.set(key,val)
+                }
+            }
+        }
+        if(tempMap.size===0) tempMap = OriginalFeedList
+        setFeedList(tempMap)
+
+        
+
+        // console.log('tempFeedList =>' + JSON.stringify())
+    }, [selectedEmotions])
 
     useEffect(() => {
 
-        const dataArray = new Map()
+        const dataMap = new Map()
+        const dataMapEmotions ={}
         database()
             .ref('feed/excited')
             .once('value')
@@ -22,11 +63,13 @@ function feed() {
                     let moods = []
                     moods.push('excited')
                     dataEl['moods'] = moods
-                    dataArray.set(el, dataEl)
-                }
-                console.log(dataArray)
+                    dataMap.set(el, dataEl)
+                    dataMapEmotions[`${el}:excited`]= true
 
-                // console.log(dataList)
+                    
+                }
+                // console.log(dataMap)
+
             })
             .then(() => database().ref('feed/sad').once('value'))
             .then(dataSnapshot => {
@@ -34,20 +77,21 @@ function feed() {
 
                 for (let el in data) {
                     let dataEl = data[el]
-                    // moods = dataArray.get(data[el])
+                    // moods = dataMap.get(data[el])
 
-                    if (dataArray.get(el) === undefined) {
+                    if (dataMap.get(el) === undefined) {
                         dataEl['moods'] = ['sad']
-                        dataArray.set(el, dataEl)
+                        dataMap.set(el, dataEl)
                     } else 
-                        dataArray
+                        dataMap
                             .get(el)['moods']
                             .push('sad')
 
-                    }
-                console.log(dataArray)
+                    dataMapEmotions[`${el}:sad`]= true
+                    
+                }
+                // console.log(dataMap)
 
-                // console.log(dataList)
             })
             .then(() => database().ref('feed/fear').once('value'))
             .then(dataSnapshot => {
@@ -55,19 +99,18 @@ function feed() {
 
                 for (let el in data) {
                     let dataEl = data[el]
-                    // moods = dataArray.get(data[el])
-                    if (dataArray.get(el) === undefined) {
+                    // moods = dataMap.get(data[el])
+                    if (dataMap.get(el) === undefined) {
                         dataEl['moods'] = ['fear']
-                        getData()
-                        dataArray.set(el, dataEl)
+                        dataMap.set(el, dataEl)
                     } else 
-                        dataArray
+                        dataMap
                             .get(el)['moods']
                             .push('fear')
 
-                    }
-                console.log(dataArray)
+                            dataMapEmotions[`${el}:fear`]= true
 
+                }
             })
             .then(() => database().ref('feed/bored').once('value'))
             .then(dataSnapshot => {
@@ -75,18 +118,19 @@ function feed() {
 
                 for (let el in data) {
                     let dataEl = data[el]
-                    // moods = dataArray.get(data[el])
-                    if (dataArray.get(el) === undefined) {
+                    // moods = dataMap.get(data[el])
+                    if (dataMap.get(el) === undefined) {
                         dataEl['moods'] = ['bored']
-                        getData()
-                        dataArray.set(el, dataEl)
+                        dataMap.set(el, dataEl)
                     } else 
-                        dataArray
+                        dataMap
                             .get(el)['moods']
                             .push('bored')
+                            dataMapEmotions[`${el}:bored`]= true
 
-                    }
-                console.log(dataArray)
+                    
+                }
+                // console.log(dataMap)
 
             })
             .then(() => database().ref('feed/happy').once('value'))
@@ -95,17 +139,18 @@ function feed() {
 
                 for (let el in data) {
                     let dataEl = data[el]
-                    // moods = dataArray.get(data[el])
-                    if (dataArray.get(el) === undefined) {
+                    // moods = dataMap.get(data[el])
+                    if (dataMap.get(el) === undefined) {
                         dataEl['moods'] = ['happy']
-                        dataArray.set(el, dataEl)
+                        dataMap.set(el, dataEl)
                     } else 
-                        dataArray
+                        dataMap
                             .get(el)['moods']
                             .push('happy')
+                            dataMapEmotions[`${el}:happy`]= true
 
-                    }
-                console.log(dataArray)
+                }
+                // console.log(dataMap)
 
             })
             .then(() => database().ref('feed/angry').once('value'))
@@ -114,48 +159,59 @@ function feed() {
 
                 for (let el in data) {
                     let dataEl = data[el]
-                    // moods = dataArray.get(data[el])
-                    if (dataArray.get(el) === undefined) {
+                    // moods = dataMap.get(data[el])
+                    if (dataMap.get(el) === undefined) {
                         dataEl['moods'] = ['angry']
-                        getData()
-                        dataArray.set(el, dataEl)
+                        dataMap.set(el, dataEl)
                     } else 
-                        dataArray
+                        dataMap
                             .get(el)['moods']
                             .push('angry')
+                            dataMapEmotions[`${el}:angry`]= true
 
-                    }
-                console.log(dataArray)
-
+                  
+                }
             })
-            .then(() => setFeedList(dataArray))
+            .then(() => {
+                setOriginalFeedList(dataMap)
+                setFeedList(dataMap)
+               setFeedListEmotions(dataMapEmotions)
+            })
 
     }, [])
 
     if (FeedList.size === 0) 
-        return (<FeedItem key={1} id={1} text="Feed Loading" smilies={0} moods={[]}/>)
+        return (
+            <View>
+                <Emotions sendEmotionsToParent={getEmotionsFromChild}/>
+                <FeedItem key={1} id={1} text="Feed Loading" smilies={0} moods={[]}/>
+            </View>
+        )
     else 
         return (
-            <FlatList
-                data={Array.from(FeedList, ([key, value]) => value)}
-                renderItem={({item}) =>< FeedItem key = {
-                    item.id
-                }
-                id = {
-                    item.id
-                }
-                text = {
-                    item.text
-                }
-                smilies = {
-                    item.smilies
-                }
-                moods = {
-                    item.moods
-                } />}
-                keyExtractor={item => item
-                    .id
-                    .toString()}></FlatList>
+            <View>
+                <Emotions sendEmotionsToParent={getEmotionsFromChild}/>
+                <FlatList
+                    data={Array.from(FeedList, ([key, value]) => value)}
+                    renderItem={({item}) =>< FeedItem key = {
+                        item.id
+                    }
+                    id = {
+                        item.id
+                    }
+                    text = {
+                        item.text
+                    }
+                    smilies = {
+                        item.smilies
+                    }
+                    moods = {
+                        item.moods
+                    } />}
+                    keyExtractor={item => item
+                        .id
+                        .toString()}></FlatList>
+            </View>
         )
 }
 
