@@ -6,7 +6,7 @@ import {
 
     Image,
     TouchableOpacity,
-
+    Picker,
     Dimensions
 } from 'react-native';
 import {Button} from 'react-native-elements';
@@ -16,7 +16,7 @@ import homeicon from './images/homeicon.png';
 import logo from './images/Homescreen.jpg';
 import users from './images/users.png';
 import Feed from './src/Components/Feed/Feed.js';
-
+import Emotions from "./src/Components/emotions/Emotions"
 function Home(props) {
     const styles = StyleSheet.create({
 
@@ -28,13 +28,17 @@ function Home(props) {
             alignItems: 'center'
         }
     });
+    
     const screenHeight = Math.round(Dimensions.get('window').height);
     const screenWidth = Math.round(Dimensions.get('window').width);
 
+
+    
     return (
         <View style={{
                 flex: 1
             }}>
+
             <View>
                 <View
                     style={{
@@ -96,12 +100,13 @@ function Home(props) {
                         title="Express your feelings here"></Button>
                 </View>
 
+               
                 <View
                     style={{
                         height: 0.66 * screenHeight
                     }}>
                     {/* <Image source={logo} style={styles.logo} /> */}
-                    <Feed/>
+                    <Feed  />
                 </View>
             </View>
 
