@@ -16,7 +16,6 @@ import homeicon from './images/homeicon.png';
 import logo from './images/Homescreen.jpg';
 import users from './images/users.png';
 import Feed from './src/Components/Feed/Feed.js';
-import Emotions from "./src/Components/emotions/Emotions"
 function Home(props) {
     const styles = StyleSheet.create({
 

@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react"
 import {ScrollView, FlatList, Text, View} from "react-native"
 import FeedItem from "./FeedItem"
 import database, {firebase} from '@react-native-firebase/database';
-import Emotions from "../emotions/Emotions"
+import EmotionsBar from "../emotions/Emotions"
 function feed() {
 
     const [FeedList, setFeedList] = useState(new Map())
@@ -17,7 +17,7 @@ function feed() {
         fear: true,
         bored: true
     })
-
+ 
     const getEmotionsFromChild = (props) => {
         setSelectedEmotions(props)
 
@@ -27,7 +27,7 @@ function feed() {
       
         // for(let [key,val] of FeedList){
             console.log(FeedListEmotions)
-            let e = 'hi'
+           
 
         // 
         let tempMap = new Map()
@@ -183,14 +183,14 @@ function feed() {
     if (FeedList.size === 0) 
         return (
             <View>
-                <Emotions sendEmotionsToParent={getEmotionsFromChild}/>
+                <EmotionsBar sendEmotionsToParent={getEmotionsFromChild}/>
                 <FeedItem key={1} id={1} text="Feed Loading" smilies={0} moods={[]}/>
             </View>
         )
     else 
         return (
             <View>
-                <Emotions sendEmotionsToParent={getEmotionsFromChild}/>
+                <EmotionsBar sendEmotionsToParent={getEmotionsFromChild}/>
                 <FlatList
                     data={Array.from(FeedList, ([key, value]) => value)}
                     renderItem={({item}) =>< FeedItem key = {
