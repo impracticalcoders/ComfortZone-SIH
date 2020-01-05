@@ -3,7 +3,7 @@ import {View, TouchableOpacity, Dimensions, KeyboardAvoidingView} from "react-na
 import {Text, Button, Input, CheckBox} from "react-native-elements"
 import database from '@react-native-firebase/database';
 
-function Emotions(props) {
+function EmotionsBar(props) {
 
     const [selectedEmotions, setSelectedEmotions] = useState({
         happy: false,
@@ -164,5 +164,23 @@ function Emotions(props) {
 
     )
 }
+export async function Emotions(text){
 
-export default Emotions
+    const body = new FormData();
+    body.append('text', text);
+    body.append('api_key', 'fVZe4uwT81OTqfZxAK75VpVHhWMLITn9KBdJWcVy1w0');
+
+   let EmotionsJson=  fetch('https://apis.paralleldots.com/v4/emotion', {
+      body,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      method: 'POST',
+    })
+      .then(res => res.json())
+     
+
+    return(EmotionsJson)
+}
+
+export default EmotionsBar
