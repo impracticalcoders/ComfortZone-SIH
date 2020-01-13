@@ -1,10 +1,9 @@
 import React, {useState, useEffect, useLayoutEffect} from "react"
-import {View, TouchableOpacity, Dimensions, KeyboardAvoidingView} from "react-native"
+import {View,Dimensions, KeyboardAvoidingView} from "react-native"
 import {Text, Button, Input, CheckBox} from "react-native-elements"
 import database from '@react-native-firebase/database';
 import EmotionsBar from '../emotions/Emotions'
 import Keywords from '../keywords/Keywords'
-
 import { Emotions } from "../emotions/Emotions";
 function Addfeeditem(props) {
 
@@ -16,34 +15,30 @@ function Addfeeditem(props) {
         fear: false,
         bored: false
     })
-    const [generatedKeywords, setGeneratedKeywords] = useState({})
-    const [generatedEmotions, setGeneratedEmotions] = useState({})
-
+    
     const screenHeight = Math.round(Dimensions.get('window').height);
 
     const [text, setText] = useState("")
-
+    const [loading,setLoading] = useState(false)
     const getEmotionsFromChild = (emotions) => {
         setSelectedEmotions(emotions)
     }
-    useEffect(() => console.log(generatedKeywords), [generatedKeywords])
-    useEffect(() => console.log(generatedEmotions), [generatedEmotions])
-
+   
     const getKeywordsForText = async () => {
         let res = await Keywords(text)
-        setGeneratedKeywords(res['keywords'])
+        return res['annotations'].map(el=>el.label)
     }
     const getEmotionsForText = async()=>{
         let res = await Emotions(text)
-        setGeneratedEmotions(res['emotion'])
+        return res['emotion']
     }
 
     const postToFeed = async () => {
 
         //waits for the api to get emotions and keywords
-        await Promise.all([getKeywordsForText(),getEmotionsForText()])
-        
-        
+        setLoading(true)
+
+        let [generatedEmotions,generatedKeywords] = await Promise.all( [getEmotionsForText(),getKeywordsForText()])
         const key = database()
             .ref('feed')
             .push()
@@ -71,10 +66,10 @@ function Addfeeditem(props) {
         const dat = {}
         dat[key] = data
 
-        database()
+        await database()
             .ref('feed/')
             .update(dat)
-
+        setLoading(false)
         alert('posted')
         props
             .navigation
@@ -88,6 +83,7 @@ function Addfeeditem(props) {
         <KeyboardAvoidingView style={{
                 flex: 1
             }}>
+
             <View
                 style={{
                     maxHeight: '95%',
@@ -97,6 +93,7 @@ function Addfeeditem(props) {
                     multiline={true}
                     placeholder="Write something good about yourself"
                     numberOfLines={8}
+                    containerStyle={{maxHeight:400}}
                     onChangeText={(text) => setText(text.toString())}/>
 
                 <EmotionsBar sendEmotionsToParent={getEmotionsFromChild}/>
@@ -104,7 +101,7 @@ function Addfeeditem(props) {
             </View>
 
             <View style={{}}>
-                <Button title="Post" onPress={postToFeed}/>
+                <Button title="Post" onPress={postToFeed} loading={loading} disabled={loading}/>
             </View>
         </KeyboardAvoidingView>
     )
