@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from "react"
-import {View, TouchableOpacity, Switch} from "react-native"
+import React, {useState, useEffect, useLayoutEffect} from "react"
+import {View,Dimensions, KeyboardAvoidingView} from "react-native"
 import {Text, Button, Input, CheckBox} from "react-native-elements"
 import database from '@react-native-firebase/database';
-
-import {Icon} from "native-base";
+import EmotionsBar from '../emotions/Emotions'
+import Keywords from '../keywords/Keywords'
+import { Emotions } from "../emotions/Emotions";
 function Addfeeditem(props) {
 
     const [selectedEmotions, setSelectedEmotions] = useState({
@@ -14,183 +15,97 @@ function Addfeeditem(props) {
         fear: false,
         bored: false
     })
+    
+    const screenHeight = Math.round(Dimensions.get('window').height);
 
     const [text, setText] = useState("")
-    const postToFeed = () => {
+    const [loading,setLoading] = useState(false)
+    const getEmotionsFromChild = (emotions) => {
+        setSelectedEmotions(emotions)
+    }
+   
+    const getKeywordsForText = async () => {
+        let res = await Keywords(text)
+        return res['annotations'].map(el=>el.label)
+    }
+    const getEmotionsForText = async()=>{
+        let res = await Emotions(text)
+        return res['emotion']
+    }
+
+    const postToFeed = async () => {
+
+        //waits for the api to get emotions and keywords
+        setLoading(true)
+
+        let [generatedEmotions,generatedKeywords] = await Promise.all( [getEmotionsForText(),getKeywordsForText()])
         const key = database()
             .ref('feed')
             .push()
             .key
+
+        let objectOfOnlySelectedEmotions =[]
+
+        //adds emotions which are selected by user to an array
+        for(let emotion in selectedEmotions){
+            if(selectedEmotions[emotion]){
+                objectOfOnlySelectedEmotions.push(emotion)
+                
+            }
+        }
+
+
         const data = {
             "id": key,
             "smilies": 0,
-            "text": text
+            "text": text,
+            "keywords": generatedKeywords,
+            "selectedEmotions": objectOfOnlySelectedEmotions,
+            "generatedEmotions":generatedEmotions
         }
         const dat = {}
         dat[key] = data
 
-        database()
-            .ref('feed')
+        await database()
+            .ref('feed/')
             .update(dat)
+        setLoading(false)
         alert('posted')
         props
             .navigation
             .navigate('HomeS')
 
-    }
-    return (
-        <View>
+           
 
-            <Input
-                multiline={true}
-                placeholder="Write something good about yourself"
-                onChangeText={(text) => setText(text.toString())}
-                containerStyle={{
-                    minHeight: "65%",
-                    maxHeight: "80%"
-                }}/>
+    }
+
+    return (
+        <KeyboardAvoidingView style={{
+                flex: 1
+            }}>
+
             <View
                 style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    marginBottom: 20
+                    maxHeight: '95%',
+                    minHeight: '85%'
                 }}>
-                <View
-                    style={{
-                        width: '16.66%',
-                        alignItems: 'center'
-                    }}>
-                    <TouchableOpacity
-                        onPress={() => setSelectedEmotions({
-                            ...selectedEmotions,
-                            happy: selectedEmotions.happy
-                                ? false
-                                : true
-                        })}>
-                        <Text
-                            style={{
-                                fontSize: selectedEmotions.happy
-                                    ? 40
-                                    : 30
-                            }}>🙂</Text>
-                    </TouchableOpacity>
+                <Input
+                    multiline={true}
+                    placeholder="Write something good about yourself"
+                    numberOfLines={8}
+                    containerStyle={{maxHeight:400}}
+                    onChangeText={(text) => setText(text.toString())}/>
 
-                </View>
-
-                
-                <View
-                    style={{
-                        width: '16.66%',
-                        alignItems: 'center'
-                    }}>
-                    <TouchableOpacity
-                        onPress={() => setSelectedEmotions({
-                            ...selectedEmotions,
-                            sad: selectedEmotions.sad
-                                ? false
-                                : true
-                        })}>
-                        <Text
-                            style={{
-                                fontSize: selectedEmotions.sad
-                                    ? 40
-                                    : 30
-                            }}>😔</Text>
-                    </TouchableOpacity>
-
-                </View>
-                <View
-                    style={{
-                        width: '16.66%',
-                        alignItems: 'center'
-                    }}>
-                    <TouchableOpacity
-                        onPress={() => setSelectedEmotions({
-                            ...selectedEmotions,
-                            angry: selectedEmotions.angry
-                                ? false
-                                : true
-                        })}>
-                        <Text
-                            style={{
-                                fontSize: selectedEmotions.angry
-                                    ? 40
-                                    : 30
-                            }}>😠</Text>
-                    </TouchableOpacity>
-
-                </View>
-                <View
-                    style={{
-                        width: '16.66%',
-                        alignItems: 'center'
-                    }}>
-                    <TouchableOpacity
-                        onPress={() => setSelectedEmotions({
-                            ...selectedEmotions,
-                            fear: selectedEmotions.fear
-                                ? false
-                                : true
-                        })}>
-                        <Text
-                            style={{
-                                fontSize: selectedEmotions.fear
-                                    ? 40    
-                                    : 30
-                            }}>😨</Text>
-                    </TouchableOpacity>
-
-                </View>
-                <View
-                    style={{
-                        width: '16.66%',
-                        alignItems: 'center'
-                    }}>
-                    <TouchableOpacity
-                        onPress={() => setSelectedEmotions({
-                            ...selectedEmotions,
-                            excited: selectedEmotions.excited
-                                ? false
-                                : true
-                        })}>
-                        <Text
-                            style={{
-                                fontSize: selectedEmotions.excited
-                                    ? 40
-                                    : 30
-                            }}>🤩</Text>
-                    </TouchableOpacity>
-
-                </View>
-                <View
-                    style={{
-                        width: '16.66%',
-                        alignItems: 'center'
-                    }}>
-                    <TouchableOpacity
-                        onPress={() => setSelectedEmotions({
-                            ...selectedEmotions,
-                            bored: selectedEmotions.bored
-                                ? false
-                                : true
-                        })}>
-                        <Text
-                            style={{
-                                fontSize: selectedEmotions.bored
-                                    ? 40
-                                    : 30
-                            }}>😴</Text>
-                    </TouchableOpacity>
-
-                </View>
-                
+                <EmotionsBar sendEmotionsToParent={getEmotionsFromChild}/>
 
             </View>
 
-            <Button title="Post" onPress={postToFeed}/>
-
-        </View>
+            <View style={{}}>
+                <Button title="Post" onPress={postToFeed} loading={loading} disabled={loading}/>
+            </View>
+        </KeyboardAvoidingView>
     )
+   
 }
 
 export default Addfeeditem
