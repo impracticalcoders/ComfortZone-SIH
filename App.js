@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Button, StyleSheet, Image, Text} from 'react-native';
 import Home from './Home.js';
+import Youtube from "./src/Components/YoutubeAPI/YoutubePage"
 import Angry from './src/moods/Angry';
 import Bored from './src/moods/Bored';
 import Excited from './src/moods/Excited';
@@ -51,6 +52,7 @@ const AppNavigator = createStackNavigator({
       },
     },
   },
+  Youtube:Youtube,
   diary: {
     screen: Diary,
     //  navigationOptions:{

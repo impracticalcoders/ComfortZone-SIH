@@ -53,7 +53,9 @@ function Home(props) {
                   elevation: 3,
                   height: 35,
                 })
-              }>
+              }
+              onPress={()=>{props.navigation.navigate('Youtube')}}
+              >
               <Text
                 style={{
                   textAlign: 'center',
