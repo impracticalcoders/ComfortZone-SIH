@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useLayoutEffect} from "react"
+import React, {useState, useEffect} from "react"
 import {View,Dimensions, KeyboardAvoidingView} from "react-native"
-import {Text, Button, Input, CheckBox} from "react-native-elements"
+import {Button, Input, } from "react-native-elements"
 import database from '@react-native-firebase/database';
 import EmotionsBar from '../emotions/Emotions'
 import Keywords from '../keywords/Keywords'
@@ -26,7 +26,8 @@ function Addfeeditem(props) {
    
     const getKeywordsForText = async () => {
         let res = await Keywords(text)
-        return res['annotations'].map(el=>el.label)
+        // return res['annotations'].map(el=>el.label)
+        return res
     }
     const getEmotionsForText = async()=>{
         let res = await Emotions(text)

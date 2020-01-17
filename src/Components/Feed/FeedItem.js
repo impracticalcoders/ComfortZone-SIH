@@ -25,10 +25,10 @@ function FeedItem(props) {
             }
         })
     const updateSmilies = () => {
-        for (let el in moods) {
+        
             if (!flag) {
                 database()
-                    .ref('feed/'+moods[el])
+                    .ref('feed/')
                     .child(props.id.toString())
                     .update({
                         "smilies": smilies + 1
@@ -39,7 +39,7 @@ function FeedItem(props) {
                 setSimilies(smilies + 1)
             } else {
                 database()
-                    .ref('feed/'+moods[el])
+                    .ref('feed/')
                     .child(props.id.toString())
                     .update({
                         "smilies": smilies - 1
@@ -50,7 +50,7 @@ function FeedItem(props) {
                 setSimilies(smilies - 1)
             }
         }
-    }
+    
     return (
         <View
             style={{
