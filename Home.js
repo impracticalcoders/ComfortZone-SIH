@@ -1,28 +1,12 @@
 import React, {Component, useState, useEffect} from 'react';
 import {
-<<<<<<< HEAD
-  ScrollView,
-  Platform,
   StyleSheet,
   Text,
   View,
-  TextInput,
-  Easing,
-  StatusBar,
   Image,
   TouchableOpacity,
-  Animated,
+  Picker,
   Dimensions,
-=======
-    StyleSheet,
-    Text,
-    View,
-
-    Image,
-    TouchableOpacity,
-    Picker,
-    Dimensions
->>>>>>> 8c3b1ecf5e318f34b4ccd59ef01c5815317386a7
 } from 'react-native';
 import {Button} from 'react-native-elements';
 import diarylogo from './images/diaryicon.png';
@@ -32,38 +16,7 @@ import logo from './images/Homescreen.jpg';
 import users from './images/users.png';
 import Feed from './src/Components/Feed/Feed.js';
 function Home(props) {
-<<<<<<< HEAD
   const styles = StyleSheet.create({
-    container: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#f7e892',
-    },
-    parent: {
-      height: '100%',
-      marginTop: 20,
-      alignItems: 'center',
-    },
-    title: {
-      fontSize: 30,
-    },
-    logo: {
-      marginTop: 50,
-      height: 400,
-      width: '100%',
-      opacity: 1,
-    },
-    welcome: {
-      fontSize: 20,
-      textAlign: 'center',
-      margin: 10,
-      marginBottom: 50,
-      color: 'black',
-    },
-    MotivationalQuote: {
-      padding: 20,
-      top: 20,
-    },
     buttons: {
       marginVertical: 4,
       marginHorizontal: 4,
@@ -71,103 +24,94 @@ function Home(props) {
       backgroundColor: 'white',
       alignItems: 'center',
     },
-
-    header: {
-      top: 0,
-      bottom: 90,
-    },
   });
+
   const screenHeight = Math.round(Dimensions.get('window').height);
   const screenWidth = Math.round(Dimensions.get('window').width);
 
   return (
-    <View>
-      <View
-        style={{
-          marginTop: 0,
-          flex: 1,
-          flexDirection: 'row',
-        }}>
+    <View
+      style={{
+        flex: 1,
+      }}>
+      <View>
         <View
           style={{
-            width: '50%',
+            marginTop: 0,
+            flexDirection: 'row',
           }}>
-          <TouchableOpacity
-            style={
-              (styles.buttons,
-              {
-                backgroundColor: '#F17828',
-                height: 35,
-              })
-            }>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontFamily: 'serif',
-                fontSize: 19,
-              }}>
-              Online
-            </Text>
-          </TouchableOpacity>
+          <View
+            style={{
+              width: '50%',
+            }}>
+            <TouchableOpacity
+              style={
+                (styles.buttons,
+                {
+                  backgroundColor: 'white',
+                  shadowColor: 'gray',
+                  elevation: 3,
+                  height: 35,
+                })
+              }>
+              <Text
+                style={{
+                  textAlign: 'center',
+                  fontFamily: 'serif',
+                  fontSize: 19,
+                }}>
+                Online
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              width: '50%',
+            }}>
+            <TouchableOpacity
+              style={
+                (styles.buttons,
+                {
+                  backgroundColor: 'white',
+                  shadowColor: 'gray',
+                  elevation: 3,
+                  height: 35,
+                })
+              }>
+              <Text
+                style={{
+                  textAlign: 'center',
+                  fontFamily: 'serif',
+                  fontSize: 19,
+                }}>
+                Offline
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View
-          style={{
-            width: '50%',
-          }}>
-          <TouchableOpacity
-            style={
-              (styles.buttons,
-              {
-                backgroundColor: '#F17828',
-                height: 35,
-              })
-            }>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontFamily: 'serif',
-                fontSize: 19,
-              }}>
-              Offline
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
 
-      <View
-        style={{
-          marginTop: 30,
-          marginBottom: 10,
-          marginLeft: 10,
-          marginRight: 10,
-        }}>
-        <Button
-          color="#c63f17"
+        <View
           style={{
-            fontSize: 20,
-            borderColor: 'gray',
-            borderWidth: 2,
             marginTop: 10,
-            marginBottom: -10,
-            padding: 10,
-            borderRadius: 30,
-            color: '#c63f17S',
-          }}
-          onPress={() => props.navigation.navigate('addfeeditem')}
-          title="Express your feelings here"></Button>
+            marginLeft: 10,
+            marginRight: 10,
+          }}>
+          <Button
+            onPress={() => props.navigation.navigate('addfeeditem')}
+            title="Express your feelings here"></Button>
+        </View>
+
+        <View
+          style={{
+            height: 0.66 * screenHeight,
+          }}>
+          {/* <Image source={logo} style={styles.logo} /> */}
+          <Feed />
+        </View>
       </View>
 
       <View
         style={{
-          height: '78%',
-        }}>
-        {/* <Image source={logo} style={styles.logo} /> */}
-        <Feed />
-      </View>
-
-      <View
-        style={{
-          flex: 1,
           flexDirection: 'row',
         }}>
         <View
@@ -202,131 +146,6 @@ function Home(props) {
             />
           </TouchableOpacity>
         </View>
-=======
-    const styles = StyleSheet.create({
-
-        buttons: {
-            marginVertical: 4,
-            marginHorizontal: 4,
-            height: 40,
-            backgroundColor: 'white',
-            alignItems: 'center'
-        }
-    });
-    
-    const screenHeight = Math.round(Dimensions.get('window').height);
-    const screenWidth = Math.round(Dimensions.get('window').width);
-
-
-    
-    return (
-        <View style={{
-                flex: 1
-            }}>
-
-            <View>
-                <View
-                    style={{
-                        marginTop: 0,
-                        flexDirection: 'row'
-                    }}>
-                    <View
-                        style={{
-                            width: '50%'
-                        }}>
-                        <TouchableOpacity
-                            style={(styles.buttons, {
-                                backgroundColor: 'white',
-                                shadowColor: 'gray',
-                                elevation: 3,
-                                height: 35
-                            })}>
-                            <Text
-                                style={{
-                                    textAlign: 'center',
-                                    fontFamily: 'serif',
-                                    fontSize: 19
-                                }}>
-                                Online
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View
-                        style={{
-                            width: '50%'
-                        }}>
-                        <TouchableOpacity
-                            style={(styles.buttons, {
-                                backgroundColor: 'white',
-                                shadowColor: 'gray',
-                                elevation: 3,
-                                height: 35
-                            })}>
-                            <Text
-                                style={{
-                                    textAlign: 'center',
-                                    fontFamily: 'serif',
-                                    fontSize: 19
-                                }}>
-                                Offline
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-
-                <View
-                    style={{
-                        marginTop: 10,
-                        marginLeft: 10,
-                        marginRight: 10
-                    }}>
-                    <Button
-                        onPress={() => props.navigation.navigate('addfeeditem')}
-                        title="Express your feelings here"></Button>
-                </View>
-
-               
-                <View
-                    style={{
-                        height: 0.66 * screenHeight
-                    }}>
-                    {/* <Image source={logo} style={styles.logo} /> */}
-                    <Feed  />
-                </View>
-            </View>
-
-            <View style={{
-                    flexDirection: 'row'
-                }}>
-                <View style={{
-                        width: '25%'
-                    }}>
-                    <TouchableOpacity
-                        style={styles.buttons}
-                        onPress={() => props.navigation.navigate('Home')}>
-                        <Image
-                            source={homeicon}
-                            style={{
-                                width: 105,
-                                height: 70
-                            }}/>
-                    </TouchableOpacity>
-                </View>
-                <View style={{
-                        width: '25%'
-                    }}>
-                    <TouchableOpacity
-                        style={styles.buttons}
-                        onPress={() => props.navigation.navigate('prevnotes')}>
-                        <Image
-                            source={diarylogo}
-                            style={{
-                                width: 105,
-                                height: 70
-                            }}/>
-                    </TouchableOpacity>
-                </View>
->>>>>>> 8c3b1ecf5e318f34b4ccd59ef01c5815317386a7
 
         <View
           style={{
