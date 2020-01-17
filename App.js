@@ -20,7 +20,10 @@ import Prevnotes from './src/Components/Prevnotes';
 import Emergency from './src/Components/seekhelp.js';
 import Metime from './src/Components/Metime';
 import Media from './src/Components/Media';
-import Addfeeditem from "./src/Components/Feed/AddfeedItem"
+import Addfeeditem from './src/Components/Feed/AddfeedItem';
+import Login from './Login.js';
+import Signup from './Signup.js';
+
 // import Save from '.src/Components/Diary'
 
 /*export default class App extends React.Component{
@@ -32,6 +35,7 @@ import Addfeeditem from "./src/Components/Feed/AddfeedItem"
   }*/
 
 const AppNavigator = createStackNavigator({
+  Login: Login,
   Home: {
     screen: Home,
     navigationOptions: {
@@ -53,11 +57,12 @@ const AppNavigator = createStackNavigator({
     //   headerRight:
     //  },
   },
+  Signup: Signup,
   dashboard: Dashboard,
   emergency: Emergency,
   Happy: Happy,
   Bored: Bored,
-  addfeeditem:Addfeeditem,
+  addfeeditem: Addfeeditem,
   Sad: Sad,
   Fear: Fear,
   Angry: Angry,
