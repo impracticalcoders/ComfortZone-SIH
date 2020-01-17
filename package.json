@@ -16,6 +16,8 @@
     "@react-native-firebase/app": "^6.2.0",
     "@react-native-firebase/database": "^6.2.0",
     "axios": "^0.19.1",
+    "keyword-extractor": "0.0.18",
+    "monkeylearn": "^3.4.0",
     "native-base": "^2.13.8",
     "react": "^16.12.0",
     "react-native": "^0.61.5",

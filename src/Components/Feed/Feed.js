@@ -4,11 +4,11 @@ import {ScrollView, FlatList, Text, View} from "react-native"
 import FeedItem from "./FeedItem"
 import database, {firebase} from '@react-native-firebase/database';
 import EmotionsBar from "../emotions/Emotions"
+import AsyncStorage from "@react-native-community/async-storage";
 function feed() {
 
     const [FeedList, setFeedList] = useState(new Map())
     let [OriginalFeedList,setOriginalFeedList] = useState(new Map())
-    const [FeedListEmotions, setFeedListEmotions] = useState({})
     const [selectedEmotions, setSelectedEmotions] = useState({
         happy: true,
         sad: true,
@@ -23,163 +23,42 @@ function feed() {
 
     }
 
-    useEffect(() => {
-      
-        // for(let [key,val] of FeedList){
-            console.log(FeedListEmotions)
-           
+    useEffect( () => {
+        let dataMap = new Map()
+        let dataMapEmotions = {}
+        let latestKeywords = []
 
-        // 
-        let tempMap = new Map()
-        for(let emotion in selectedEmotions){
-           if(selectedEmotions[emotion])
-            for(let [key,val] of OriginalFeedList){
-                console.log(FeedListEmotions[`${key}:${emotion}`] + ` ${emotion}`)
-                if(FeedListEmotions[`${key}:${emotion}`]){
-                    tempMap.set(key,val)
-                }
-            }
-        }
-        if(tempMap.size===0) tempMap = OriginalFeedList
-        setFeedList(tempMap)
-
-        
-
-        // console.log('tempFeedList =>' + JSON.stringify())
-    }, [selectedEmotions])
-
-    useEffect(() => {
-
-        const dataMap = new Map()
-        const dataMapEmotions ={}
+        const fetchData = async()=>await AsyncStorage.getItem("latestKeywords").then(res=>{
+            latestKeywords = JSON.parse(res)
+            
+        })
+        fetchData()
         database()
-            .ref('feed/excited')
+            .ref('/feed')
             .once('value')
-            .then(dataSnapshot => {
-                const data = dataSnapshot.val()
+            .then(ds => {
 
-                for (let el in data) {
+                const data = ds.val()
+                for(let el in data){
+                    if(el==='happy'||el==='angry'||el==='bored'||el==='excited'||el==='fear'||el==='sad')continue;
+                    
                     let dataEl = data[el]
-                    let moods = []
-                    moods.push('excited')
-                    dataEl['moods'] = moods
-                    dataMap.set(el, dataEl)
-                    dataMapEmotions[`${el}:excited`]= true
-
+                    let flag = false;
+                   for(let i in latestKeywords ) for(let j in dataEl.keywords){
+                    if(latestKeywords[i]===dataEl.keywords[j]){flag= true;break;}
+                    }
+                    if(flag)
+                    {let moods = []
+                    moods =Object.keys(dataEl.generatedEmotions).reduce((a, b) => dataEl.generatedEmotions[a] > dataEl.generatedEmotions[b] ? a : b);
+                    dataEl['moods'] = [moods]
+                    dataMap.set(el, dataEl)}
                     
                 }
                 // console.log(dataMap)
-
-            })
-            .then(() => database().ref('feed/sad').once('value'))
-            .then(dataSnapshot => {
-                const data = dataSnapshot.val()
-
-                for (let el in data) {
-                    let dataEl = data[el]
-                    // moods = dataMap.get(data[el])
-
-                    if (dataMap.get(el) === undefined) {
-                        dataEl['moods'] = ['sad']
-                        dataMap.set(el, dataEl)
-                    } else 
-                        dataMap
-                            .get(el)['moods']
-                            .push('sad')
-
-                    dataMapEmotions[`${el}:sad`]= true
-                    
-                }
-                // console.log(dataMap)
-
-            })
-            .then(() => database().ref('feed/fear').once('value'))
-            .then(dataSnapshot => {
-                const data = dataSnapshot.val()
-
-                for (let el in data) {
-                    let dataEl = data[el]
-                    // moods = dataMap.get(data[el])
-                    if (dataMap.get(el) === undefined) {
-                        dataEl['moods'] = ['fear']
-                        dataMap.set(el, dataEl)
-                    } else 
-                        dataMap
-                            .get(el)['moods']
-                            .push('fear')
-
-                            dataMapEmotions[`${el}:fear`]= true
-
-                }
-            })
-            .then(() => database().ref('feed/bored').once('value'))
-            .then(dataSnapshot => {
-                const data = dataSnapshot.val()
-
-                for (let el in data) {
-                    let dataEl = data[el]
-                    // moods = dataMap.get(data[el])
-                    if (dataMap.get(el) === undefined) {
-                        dataEl['moods'] = ['bored']
-                        dataMap.set(el, dataEl)
-                    } else 
-                        dataMap
-                            .get(el)['moods']
-                            .push('bored')
-                            dataMapEmotions[`${el}:bored`]= true
-
-                    
-                }
-                // console.log(dataMap)
-
-            })
-            .then(() => database().ref('feed/happy').once('value'))
-            .then(dataSnapshot => {
-                const data = dataSnapshot.val()
-
-                for (let el in data) {
-                    let dataEl = data[el]
-                    // moods = dataMap.get(data[el])
-                    if (dataMap.get(el) === undefined) {
-                        dataEl['moods'] = ['happy']
-                        dataMap.set(el, dataEl)
-                    } else 
-                        dataMap
-                            .get(el)['moods']
-                            .push('happy')
-                            dataMapEmotions[`${el}:happy`]= true
-
-                }
-                // console.log(dataMap)
-
-            })
-            .then(() => database().ref('feed/angry').once('value'))
-            .then(dataSnapshot => {
-                const data = dataSnapshot.val()
-
-                for (let el in data) {
-                    let dataEl = data[el]
-                    // moods = dataMap.get(data[el])
-                    if (dataMap.get(el) === undefined) {
-                        dataEl['moods'] = ['angry']
-                        dataMap.set(el, dataEl)
-                    } else 
-                        dataMap
-                            .get(el)['moods']
-                            .push('angry')
-                            dataMapEmotions[`${el}:angry`]= true
-
-                  
-                }
-            })
-            .then(() => {
-                setOriginalFeedList(dataMap)
                 setFeedList(dataMap)
-               setFeedListEmotions(dataMapEmotions)
+                setOriginalFeedList(dataMap)
             })
-
     }, [])
-
     if (FeedList.size === 0) 
         return (
             <View>

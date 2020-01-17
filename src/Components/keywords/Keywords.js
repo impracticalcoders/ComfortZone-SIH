@@ -1,14 +1,18 @@
 export default async function Keywords(text) {
-    const axios = require('axios')
 
-    const body = new FormData();
-    body.append('text', text);
-    body.append('api_key', 'fVZe4uwT81OTqfZxAK75VpVHhWMLITn9KBdJWcVy1w0');
+    const MonkeyLearn = require('monkeylearn')
 
-    let keywordsJson = await fetch(`https://api.dandelion.eu/datatxt/nex/v1/?min_confidence=0.2&text=${text}&token=4873e0b97e264991852a8935ee924fa2&epsilon=0.5`)
-    .then(res => res.json())
+    const ml = new MonkeyLearn('861797d3091126a147cf46618e7a90e2a359fef6')
+    let model_id = 'ex_YCya9nrn'
+    let data = [text]
 
-    console.log(keywordsJson)
+    let res = await ml
+        .extractors
+        .extract(model_id, data)
 
-    return (keywordsJson)
+    let keywordsArray = (res.body)[0]
+        .extractions
+        .map(el => el.parsed_value)
+    console.log(keywordsArray)
+    return (keywordsArray)
 }

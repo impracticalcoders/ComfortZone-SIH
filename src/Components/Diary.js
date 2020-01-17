@@ -1,13 +1,9 @@
 import React, {useState} from 'react';
 import Keywords from "./keywords/Keywords"
-import {
-    Text,
-    View,
-    Button,
-    TextInput,
-    StyleSheet,
-} from 'react-native';
+import {Text, View, TextInput, StyleSheet} from 'react-native';
+import {Button} from "react-native-elements"
 import AsyncStorage from "@react-native-community/async-storage"
+import {Emotions} from "./emotions/Emotions";
 
 function Diary(props) {
     const style = StyleSheet.create({
@@ -22,57 +18,42 @@ function Diary(props) {
 
     const [NoteText, setnt] = useState('');
     const [MoodText, setmt] = useState('');
+    const [loading, setLoading] = useState(false)
+
+    const getKeywordsForText = async () => {
+        let res = await Keywords(NoteText)
+        // return res['annotations'].map(el=>el.label)
+        return res
+    }
+    const getEmotionsForText = async () => {
+        let res = await Emotions(NoteText)
+        return res['emotion']
+    }
 
     const getEmotion = async () => {
-        let word = '';
-        const body = new FormData();
-        body.append('text', NoteText);
-        body.append('api_key', 'fVZe4uwT81OTqfZxAK75VpVHhWMLITn9KBdJWcVy1w0');
+        setLoading(true)
+        let [generatedEmotions, generatedKeywords] = await Promise.all(
+            [getEmotionsForText(), getKeywordsForText()]
+        )
 
-        fetch('https://apis.paralleldots.com/v4/emotion', {
-            body,
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            method: 'POST'
-        })
-            .then(res => res.json())
-            .then(res => {
-                // console.log(res);
-                let max = 0.0;
+        let mood = Object
+            .keys(generatedEmotions)
+            .reduce(
+                (a, b) => generatedEmotions[a] > generatedEmotions[b]
+                    ? a
+                    : b
+            );
 
-                for (var el in res.emotion) {
-                    if (max < res.emotion[el]) {
-                        max = res.emotion[el];
-                        word = el;
-                    }
-                }
+        setLoading(false)
 
-                setmt(word);
+        alert(
+            'You seem to be ' + mood + ' . I have just the right thing for you, go to your ' +
+            'media tab '
+        );
 
-                AsyncStorage
-                    .getItem('moods')
-                    .then(res => {
-                        let mooddata = JSON.parse(res);
-                        // console.log(mooddata);
-                        if (mooddata === null) 
-                            mooddata = [];
-                        mooddata.push(word);
-                        AsyncStorage.setItem('moods', JSON.stringify(mooddata));
-                    });
+        let data = [];
 
-                alert(
-                    'You seem to be ' + word + ' . I have just the right thing for you, go to your ' +
-                            'media tab ',
-                    res['keywords']
-                );
-            });
-        let data = ['hi'];
-
-        await Keywords(NoteText).then(
-            generatedKeywords =>
-            {AsyncStorage.setItem('latestKeywords',JSON.stringify(generatedKeywords))})
-        
+        AsyncStorage.setItem('latestKeywords', JSON.stringify(generatedKeywords))
 
         AsyncStorage
             .getItem('notes')
@@ -85,14 +66,18 @@ function Diary(props) {
                 // console.log(data);
                 AsyncStorage.setItem('notes', JSON.stringify(data));
             })
-
+        props
+            .navigation
+            .navigate('HomeS')
 
     };
 
-    const getKeyword =()=>{
-      AsyncStorage.getItem('latestKeywords').then(res=>{
-        const keywords = JSON.parse(res)
-      })
+    const getKeyword = () => {
+        AsyncStorage
+            .getItem('latestKeywords')
+            .then(res => {
+                const keywords = JSON.parse(res)
+            })
     }
     return (
         <View>
@@ -107,8 +92,12 @@ function Diary(props) {
                     width: '100%',
                     marginTop: 20
                 }}>
-                <Button name="Save" title="Save" onPress={getEmotion}/>
-                {/* <Button name="getKeyword" title="get" onPress={getKeyword}/> */}
+                <Button
+                    name="Save"
+                    title="Save"
+                    onPress={getEmotion}
+                    loading={loading}
+                    disabled={loading}/>
 
             </View>
         </View>
