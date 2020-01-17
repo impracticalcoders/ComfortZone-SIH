@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text,Linking} from "react-native"
 import {Card, Image, Button} from "react-native-elements"
-import YoutubeApi from "./YoutubeAPI"
 
 const YoutubeItem = (props) => {
 
