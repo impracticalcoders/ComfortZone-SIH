@@ -27,7 +27,8 @@
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^1.10.3",
-    "react-scripts": "^3.3.0"
+    "react-scripts": "^3.3.0",
+    "youtube-search": "^1.1.4"
   },
   "devDependencies": {
     "babel-jest": "^24.9.0",
