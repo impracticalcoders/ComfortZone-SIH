@@ -28,7 +28,7 @@ const YoutubePage = () => {
                     Item => <YoutubeItem
                         key={Item.link}
                         title={Item.title}
-                        link={Item.url}
+                        link={Item.link}
                         imgUrl={Item.thumbnails.medium.url}/>
                 )
             }
