@@ -79,13 +79,10 @@ function Login(props) {
         <TouchableOpacity
           style={styles.buttonSignUp}
           onPress={() => props.navigation.navigate('Signup')}>
-          >
           <Text
             style={{
               color: '#c0392b',
-            }}>
-            Haven't been here before? Sign Up!
-          </Text>
+            }}>Haven't been here before? Sign Up!</Text>
         </TouchableOpacity>
       </View>
     </View>
