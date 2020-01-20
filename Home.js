@@ -33,6 +33,7 @@ function Home(props) {
     <View
       style={{
         flex: 1,
+        backgroundColor: '#ababab',
       }}>
       <View>
         <View
@@ -48,7 +49,7 @@ function Home(props) {
               style={
                 (styles.buttons,
                 {
-                  backgroundColor: 'white',
+                  backgroundColor: '#d35400',
                   shadowColor: 'gray',
                   elevation: 3,
                   height: 35,
@@ -72,7 +73,7 @@ function Home(props) {
               style={
                 (styles.buttons,
                 {
-                  backgroundColor: 'white',
+                  backgroundColor: '#d35400',
                   shadowColor: 'gray',
                   elevation: 3,
                   height: 35,
@@ -97,8 +98,9 @@ function Home(props) {
             marginRight: 10,
           }}>
           <Button
+            color="#ff7043"
             onPress={() => props.navigation.navigate('addfeeditem')}
-            title="Express your feelings here"></Button>
+            title="Write something inspiring"></Button>
         </View>
 
         <View

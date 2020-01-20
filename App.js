@@ -10,7 +10,7 @@ import Sad from './src/moods/Sad';
 import PastNotes from './src/PastNotes';
 import HomeScreen from './src/Components/HomeScreen.js';
 import logo from './images/splashimage.png';
-import gluck from './images/gluck.png';
+import gluck from './images/loginpic.png';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import Diary from './src/Components/Diary.js';
@@ -43,11 +43,11 @@ const AppNavigator = createStackNavigator({
       headerBackground: (
         <Image
           source={gluck}
-          style={{marginRight: 100, width: '100%', height: 50}}
+          style={{marginLeft: 140, width: '30%', height: 50}}
         />
       ),
       headerStyle: {
-        backgroundColor: '#e3e3e3',
+        backgroundColor: '#ababab',
       },
     },
   },
